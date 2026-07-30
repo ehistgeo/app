@@ -12,7 +12,7 @@ html, body {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #667eea;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,8 +24,8 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 30px 20px;
-    gap: 30px;
+    padding: 20px;
+    gap: 20px;
 }
 
 /* Header */
@@ -36,14 +36,14 @@ body {
 }
 
 .logo {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 15px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
     object-fit: contain;
 }
 
 .header p {
-    font-size: 1em;
+    font-size: 0.95em;
     opacity: 0.9;
     line-height: 1.4;
 }
@@ -65,10 +65,10 @@ body {
 
 /* Buttons */
 .button {
-    padding: 20px;
+    padding: 18px;
     border: none;
     border-radius: 12px;
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
@@ -76,9 +76,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 70px;
+    min-height: 65px;
     transition: all 0.2s ease;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .button:active {
@@ -89,47 +89,48 @@ body {
 .button-class {
     background: rgba(255, 255, 255, 0.95);
     color: #333;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .button-class:hover {
     background: white;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* ENT Button */
 .button-ent {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    font-size: 1.05em;
+    background: #8b8b8b;
+    font-size: 0.95em;
     width: 100%;
-    box-shadow: 0 6px 16px rgba(245, 87, 108, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .button-ent:hover {
-    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+    background: #9a9a9a;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */
 @media (max-width: 480px) {
     .app {
-        padding: 20px 16px;
-        gap: 25px;
+        padding: 15px;
+        gap: 18px;
     }
 
     .logo {
-        width: 20px;
-        height: 20px;
-        margin-bottom: 12px;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 8px;
     }
 
     .header p {
-        font-size: 0.95em;
+        font-size: 0.9em;
     }
 
     .button {
         min-height: 60px;
-        font-size: 0.95em;
-        padding: 16px;
+        padding: 15px;
+        font-size: 0.9em;
     }
 
     .grid {
@@ -139,22 +140,23 @@ body {
 
 @media (max-height: 700px) {
     .app {
-        padding: 15px 16px;
-        gap: 20px;
+        padding: 12px;
+        gap: 15px;
     }
 
     .logo {
-        width: 18px;
-        height: 18px;
-        margin-bottom: 8px;
+        width: 45px;
+        height: 45px;
+        margin-bottom: 6px;
     }
 
     .header p {
-        font-size: 0.9em;
+        font-size: 0.85em;
     }
 
     .button {
         min-height: 55px;
         padding: 12px;
+        font-size: 0.9em;
     }
 }
