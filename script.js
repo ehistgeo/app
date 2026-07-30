@@ -1,13 +1,11 @@
-// Add interactivity to tiles
+// Add interactivity to buttons
 document.addEventListener('DOMContentLoaded', function() {
-    const tiles = document.querySelectorAll('.tile');
+    const buttons = document.querySelectorAll('.class-button, .ent-button');
     
-    tiles.forEach(tile => {
-        tile.addEventListener('click', function() {
-            const link = this.querySelector('.tile-link');
-            if (link && link.href !== '#') {
-                window.open(link.href, '_blank');
-            }
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Links will open automatically due to target="_blank"
+            // This is just for additional interactivity if needed
         });
     });
 });
