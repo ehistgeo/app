@@ -35,10 +35,11 @@ body {
     flex-shrink: 0;
 }
 
-.header h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
-    font-weight: 700;
+.logo {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 15px;
+    object-fit: contain;
 }
 
 .header p {
@@ -115,8 +116,10 @@ body {
         gap: 25px;
     }
 
-    .header h1 {
-        font-size: 2.2em;
+    .logo {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 12px;
     }
 
     .header p {
@@ -140,8 +143,10 @@ body {
         gap: 20px;
     }
 
-    .header h1 {
-        font-size: 2em;
+    .logo {
+        width: 18px;
+        height: 18px;
+        margin-bottom: 8px;
     }
 
     .header p {
