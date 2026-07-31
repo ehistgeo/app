@@ -45,7 +45,12 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   font-weight:var(--fw-group);letter-spacing:var(--ls-group);text-transform:var(--tt-group);color:var(--group-ink)}
 .grid{display:grid;gap:var(--gap-tile)}
 .grid--cours{grid-template-columns:repeat(2,1fr)}
-.grid--liens{grid-template-columns:repeat(3,1fr)}
+/* Ressources : 6 colonnes servant de trame commune. Rangée 1, deux tuiles
+   larges de 3 colonnes. Rangée 2, trois tuiles de 2 colonnes. Les bords
+   extérieurs des deux rangées restent alignés. */
+.grid--liens{grid-template-columns:repeat(6,1fr)}
+.grid--liens>.tile{grid-column:span 2}
+.grid--liens>.tile--large{grid-column:span 3}
 .tile{display:flex;align-items:center;justify-content:center;text-align:center;
   text-decoration:none;min-height:44px;padding:6px 8px;line-height:1.15;
   transition:transform .14s ease, background-color .14s ease, box-shadow .14s ease, border-color .14s ease, color .14s ease}
@@ -56,7 +61,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile-ico{width:.95em;height:.95em;flex:0 0 auto;opacity:.92;transform:translateY(.065em)}
 .tile--ent{min-height:var(--h-ent);font-family:var(--font-title);font-size:var(--fs-ent);font-weight:var(--fw-ent);letter-spacing:var(--ls-ent)}
 .tile--lien{min-height:var(--h-lien);font-size:var(--fs-lien);font-weight:var(--fw-lien)}
-.tile--vide{cursor:default;pointer-events:none}
 .mentions{margin-top:auto;padding-top:var(--gap-block);text-align:center;
   font-size:var(--fs-mentions);color:var(--muted);line-height:1.4;text-wrap:pretty}
 @media (prefers-reduced-motion:reduce){.tile{transition:none}}
@@ -72,7 +76,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--ent:active{transform:translateY(1px)}
 .tile--lien{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius)}
 .tile--lien:hover{border-color:var(--bleu);color:var(--bleu)}
-.tile--vide{background:transparent;border-style:dashed;color:var(--muted)}
 .tile:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
 /* Sous 360 px, le pictogramme ferait passer les libellés longs sur deux lignes */
