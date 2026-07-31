@@ -13,8 +13,10 @@
     --group-space: 20px;
     /* Recul du logo par rapport au haut de la page */
     --top-space: 48px;
-    /* Hauteur réduite des tuiles ENT et Pearltrees */
+    /* Hauteur réduite de la tuile ENT */
     --link-height: 52px;
+    /* Hauteur des six petites tuiles de ressources */
+    --small-height: 46px;
     /* Fond bleu très clair */
     --bg: #e7f0fb;
     /* Bleu des 4 tuiles de classe : contraste 5,2:1 avec le texte blanc (WCAG AA) */
@@ -116,6 +118,11 @@ body {
     gap: var(--tile-gap);
 }
 
+/* Grille des six petites tuiles : 3 colonnes, 2 rangées */
+.grid-small {
+    grid-template-columns: repeat(3, 1fr);
+}
+
 /* Buttons : contour gris foncé identique pour toutes les tuiles */
 .button {
     padding: 18px;
@@ -167,6 +174,31 @@ body {
     background: var(--tile-grey-hover);
 }
 
+/* Petites tuiles de ressources.
+   Double classe pour rester prioritaire sur les .button des media queries. */
+.button.button-small {
+    min-height: var(--small-height);
+    padding: 8px;
+    font-size: 0.8em;
+    background: var(--tile-grey);
+    color: white;
+}
+
+.button-small:hover {
+    background: var(--tile-grey-hover);
+}
+
+/* Emplacements encore sans lien : non cliquables */
+.button-empty {
+    cursor: default;
+    border-style: dashed;
+    opacity: 0.7;
+}
+
+.button-empty:active {
+    transform: none;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
     :root {
@@ -174,6 +206,7 @@ body {
         --group-space: 18px;
         --top-space: 40px;
         --link-height: 50px;
+        --small-height: 44px;
     }
 
     .app {
@@ -205,6 +238,7 @@ body {
         --group-space: 12px;
         --top-space: 28px;
         --link-height: 46px;
+        --small-height: 40px;
     }
 
     .app {
