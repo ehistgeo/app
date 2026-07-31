@@ -9,7 +9,7 @@
     /* Écart de référence entre deux tuiles voisines */
     --tile-gap: 12px;
     --stack-gap: var(--tile-gap);
-    /* Respiration au-dessus d'un titre de groupe (« Mes cours », « Autres liens ») */
+    /* Respiration au-dessus d'un titre de groupe (« Vos cours », « Vos ressources ») */
     --group-space: 20px;
     /* Recul du logo par rapport au haut de la page */
     --top-space: 48px;
@@ -95,12 +95,12 @@ body {
     flex-direction: column;
 }
 
-/* Détache la grille de classes du bloc « Autres liens » */
+/* Détache la grille de classes du bloc « Vos ressources » */
 .section-classes {
     margin-bottom: var(--group-space);
 }
 
-/* Titres de groupe : « Mes cours » et « Autres liens » */
+/* Titres de groupe : « Vos cours » et « Vos ressources » */
 .group-title {
     text-align: center;
     color: #000;
