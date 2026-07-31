@@ -10,6 +10,9 @@
   --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --font-title:var(--font);
   --maxw:600px; --pad-x:18px; --pad-y:clamp(12px,2.4svh,22px);
   --gap-block:clamp(10px,1.8svh,16px); --gap-hero:8px; --gap-tile:10px;
+  /* Respiration supplémentaire au-dessus des deux titres de groupe,
+     identique pour « Vos cours » et « Vos ressources ». */
+  --space-group:clamp(10px,3.2svh,26px);
   --logo:clamp(50px,7.8svh,66px);
   --fs-welcome:15px; --fs-welcome-sub:13px;
   --fs-group:12px; --fw-group:600; --ls-group:.09em; --tt-group:uppercase;
@@ -30,7 +33,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .logo{width:auto;height:var(--logo);display:block}
 .welcome{margin:0;text-align:center;text-wrap:pretty;font-size:var(--fs-welcome);line-height:1.35;color:var(--ink)}
 .welcome--sub{color:var(--muted);font-size:var(--fs-welcome-sub);max-width:34ch}
-.group{margin:0;text-align:center;font-family:var(--font-title);font-size:var(--fs-group);
+.group{margin:var(--space-group) 0 0;text-align:center;font-family:var(--font-title);font-size:var(--fs-group);
   font-weight:var(--fw-group);letter-spacing:var(--ls-group);text-transform:var(--tt-group);color:var(--group-ink)}
 .grid{display:grid;gap:var(--gap-tile)}
 .grid--cours{grid-template-columns:repeat(2,1fr)}
@@ -61,6 +64,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
 @media (max-height:620px){:root{
-  --pad-y:8px; --gap-block:8px; --gap-hero:4px;
+  --pad-y:8px; --gap-block:6px; --gap-hero:4px; --space-group:6px;
   --logo:40px; --h-cours:54px; --h-ent:46px; --h-lien:44px;
   --fs-welcome:14px; --fs-welcome-sub:11px; --fs-mentions:10px;}}
