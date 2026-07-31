@@ -33,6 +33,11 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   -webkit-font-smoothing:antialiased}
 .page{width:100%;max-width:var(--maxw);display:flex;flex-direction:column;gap:var(--gap-block)}
 .hero{display:flex;flex-direction:column;align-items:center;gap:var(--gap-hero)}
+/* Le logo est un lien vers la page elle-même : un appui la recharge */
+.logo-link{display:block;border-radius:8px;transition:opacity .14s ease}
+.logo-link:hover{opacity:.85}
+.logo-link:active{opacity:.7}
+.logo-link:focus-visible{outline:3px solid var(--magenta);outline-offset:4px}
 .logo{width:auto;height:var(--logo);display:block}
 .welcome{margin:0;text-align:center;text-wrap:pretty;font-size:var(--fs-welcome);font-weight:var(--fw-welcome);line-height:1.35;color:var(--ink)}
 .welcome--sub{color:var(--muted);font-size:var(--fs-welcome-sub);font-weight:400}
