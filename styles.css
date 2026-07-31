@@ -50,8 +50,10 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   text-decoration:none;min-height:44px;padding:6px 8px;line-height:1.15;
   transition:transform .14s ease, background-color .14s ease, box-shadow .14s ease, border-color .14s ease, color .14s ease}
 .tile--cours{min-height:var(--h-cours);font-family:var(--font-title);font-size:var(--fs-cours);font-weight:var(--fw-cours);letter-spacing:var(--ls-cours);gap:.3em}
-/* Pictogramme carnet : dimensionné et coloré par le libellé, l'ensemble reste centré */
-.tile-ico{width:1.05em;height:1.05em;flex:0 0 auto;opacity:.92}
+/* Pictogramme carnet : coloré par le libellé, et calibré pour que sa hauteur
+   d'encre égale la hauteur des capitales. Le décalage vertical aligne son axe
+   sur l'axe optique des capitales, qui n'ont pas de jambage descendant. */
+.tile-ico{width:.95em;height:.95em;flex:0 0 auto;opacity:.92;transform:translateY(.065em)}
 .tile--ent{min-height:var(--h-ent);font-family:var(--font-title);font-size:var(--fs-ent);font-weight:var(--fw-ent);letter-spacing:var(--ls-ent)}
 .tile--lien{min-height:var(--h-lien);font-size:var(--fs-lien);font-weight:var(--fw-lien)}
 .tile--vide{cursor:default;pointer-events:none}
