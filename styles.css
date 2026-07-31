@@ -20,11 +20,11 @@
     /* Bleu des 4 tuiles de classe : contraste 5,2:1 avec le texte blanc (WCAG AA) */
     --tile-blue: #2f6fb5;
     --tile-blue-hover: #275d99;
-    /* Gris clair des tuiles ENT et Pearltrees : trop clair pour du texte blanc,
-       elles portent donc un texte gris très foncé, contraste 4,8:1 */
+    /* Gris clair des tuiles ENT et Pearltrees. Texte blanc demandé : contraste
+       3,4:1, en dessous du seuil WCAG AA de 4,5:1 pour ce corps de texte. */
     --tile-grey: #868b90;
     --tile-grey-hover: #767b80;
-    --tile-grey-text: #1b2024;
+    --tile-grey-text: #ffffff;
     /* Contour gris foncé des tuiles */
     --tile-border: #3f4448;
     /* Texte de l'en-tête, lisible sur fond clair */
@@ -76,6 +76,19 @@ body {
     line-height: 1.4;
 }
 
+/* Mentions, plaquées en bas de page */
+.footer {
+    margin-top: auto;
+    text-align: center;
+    color: var(--text);
+}
+
+.footer p {
+    font-size: 0.75em;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
 /* Section */
 .section {
     flex: 0 0 auto;
@@ -93,7 +106,7 @@ body {
     text-align: center;
     color: #000;
     font-size: 0.85em;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.02em;
 }
 
