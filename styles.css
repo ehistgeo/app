@@ -9,8 +9,10 @@
     /* Écart de référence entre deux tuiles voisines */
     --tile-gap: 12px;
     --stack-gap: var(--tile-gap);
-    /* Respiration ajoutée sous le texte d'accueil et sous la grille de classes */
+    /* Respiration ajoutée sous le texte d'accueil */
     --group-space: 8px;
+    /* Détachement plus marqué entre la grille de classes et le bloc « Autres liens » */
+    --group-space-lg: 20px;
     /* Recul du logo par rapport au haut de la page */
     --top-space: 48px;
     /* Fond bleu très clair */
@@ -81,9 +83,17 @@ body {
     flex-direction: column;
 }
 
-/* Détache la grille de classes du bloc ENT / Pearltrees */
+/* Détache la grille de classes du bloc « Autres liens » */
 .section-classes {
-    margin-bottom: var(--group-space);
+    margin-bottom: var(--group-space-lg);
+}
+
+/* Titre du bloc ENT / Pearltrees */
+.group-title {
+    text-align: center;
+    color: #000;
+    font-size: 1.05em;
+    font-weight: 600;
 }
 
 /* Grid */
@@ -176,6 +186,7 @@ body {
     :root {
         --tile-gap: 10px;
         --group-space: 6px;
+        --group-space-lg: 12px;
         --top-space: 28px;
     }
 
