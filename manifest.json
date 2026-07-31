@@ -4,8 +4,8 @@
   "description": "Portail pédagogique e-histgeo - Accès aux cours et ressources",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#e7f0fb",
-  "theme_color": "#e7f0fb",
+  "background_color": "#ECEFF4",
+  "theme_color": "#12335C",
   "scope": "./",
   "icons": [
     {
@@ -18,7 +18,7 @@
   "categories": ["education"],
   "screenshots": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23e7f0fb' width='540' height='720'/></svg>",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23ECEFF4' width='540' height='720'/></svg>",
       "sizes": "540x720",
       "type": "image/svg+xml",
       "form_factor": "narrow"

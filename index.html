@@ -6,79 +6,44 @@
     <title>e-histgeo</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#e7f0fb">
+    <meta name="theme-color" content="#12335C">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="e-histgeo">
 </head>
 <body>
-    <div class="app">
-        <!-- Header -->
-        <header class="header">
-            <img src="e-histgeo logo.png" alt="e-histgeo" class="logo">
-            <p>Bienvenue sur l'app e-histgeo</p>
-            <p>Vous retrouverez ici tous les liens utiles pour suivre le cours</p>
+    <div class="page">
+
+        <header class="hero">
+            <img class="logo" src="e-histgeo logo.png" alt="e-histgeo" width="1578" height="1573">
+            <p class="welcome">Bienvenue sur l’app e-histgeo</p>
+            <p class="welcome welcome--sub">Vous retrouverez ici tous les liens utiles pour suivre le cours</p>
         </header>
 
-        <!-- Mes cours -->
-        <h2 class="group-title">Vos cours</h2>
+        <h2 class="group">Vos cours</h2>
+        <nav class="grid grid--cours" aria-label="Vos cours">
+            <a class="tile tile--cours" href="https://edurl.fr/ON2GT" target="_blank" rel="noopener">2GT</a>
+            <a class="tile tile--cours" href="https://edurl.fr/ON1STMG" target="_blank" rel="noopener">1STMG</a>
+            <a class="tile tile--cours" href="http://edurl.fr/ON1HGGSP" target="_blank" rel="noopener">1SPE HGGSP</a>
+            <a class="tile tile--cours" href="http://edurl.fr/ONTHGGSP" target="_blank" rel="noopener">TSPE HGGSP</a>
+        </nav>
 
-        <!-- Classes Grid -->
-        <section class="section section-classes">
-            <div class="grid">
-                <a href="https://edurl.fr/ON2GT" class="button button-class" target="_blank">
-                    2GT
-                </a>
-                <a href="https://edurl.fr/ON1STMG" class="button button-class" target="_blank">
-                    1STMG
-                </a>
-                <a href="http://edurl.fr/ON1HGGSP" class="button button-class" target="_blank">
-                    1SPE HGGSP
-                </a>
-                <a href="http://edurl.fr/ONTHGGSP" class="button button-class" target="_blank">
-                    TSPE HGGSP
-                </a>
-            </div>
-        </section>
+        <h2 class="group">Vos ressources</h2>
+        <a class="tile tile--ent" href="https://psn.monlycee.net" target="_blank" rel="noopener">ENT</a>
 
-        <!-- Vos ressources -->
-        <h2 class="group-title">Vos ressources</h2>
+        <nav class="grid grid--liens" aria-label="Vos ressources">
+            <!-- http : le certificat https de ce domaine ne correspond pas au nom de domaine -->
+            <a class="tile tile--lien" href="http://cdg-longperrier.fr" target="_blank" rel="noopener">Lycée</a>
+            <a class="tile tile--lien" href="https://www.pearltrees.com/private/id104592773?access=47df8840014.63bf585.4e6aac77190f5994214486dadbbf9be3" target="_blank" rel="noopener">Pearltrees</a>
+            <a class="tile tile--lien" href="https://reactiv.dane.ac-versailles.fr" target="_blank" rel="noopener">Réactiv’</a>
+            <a class="tile tile--lien" href="https://youtube.com/playlist?list=PLZmuf2KsdD-c&amp;si=917XmsMGsE5s0ZmF" target="_blank" rel="noopener">YT</a>
+            <!-- TODO : deux liens à renseigner -->
+            <span class="tile tile--lien tile--vide" aria-hidden="true">?</span>
+            <span class="tile tile--lien tile--vide" aria-hidden="true">?</span>
+        </nav>
 
-        <!-- ENT Button -->
-        <section class="section">
-            <a href="https://psn.monlycee.net" class="button button-link" target="_blank">
-                ENT
-            </a>
-        </section>
+        <footer class="mentions">e-histgeo, site pédagogique de M. PLANCHOT-GEFFARD. Tous droits réservés.</footer>
 
-        <!-- Petites tuiles de ressources -->
-        <section class="section">
-            <div class="grid grid-small">
-                <!-- http : le certificat https de ce domaine ne correspond pas au nom de domaine -->
-                <a href="http://cdg-longperrier.fr" class="button button-small" target="_blank" rel="noopener">
-                    Lycée
-                </a>
-                <a href="https://www.pearltrees.com/private/id104592773?access=47df8840014.63bf585.4e6aac77190f5994214486dadbbf9be3" class="button button-small" target="_blank" rel="noopener">
-                    Pearltrees
-                </a>
-                <a href="https://reactiv.dane.ac-versailles.fr" class="button button-small" target="_blank" rel="noopener">
-                    Réactiv'
-                </a>
-                <a href="https://youtube.com/playlist?list=PLZmuf2KsdD-c&amp;si=917XmsMGsE5s0ZmF" class="button button-small" target="_blank" rel="noopener">
-                    YT
-                </a>
-                <!-- TODO : deux liens à renseigner -->
-                <span class="button button-small button-empty" title="Lien à venir">?</span>
-                <span class="button button-small button-empty" title="Lien à venir">?</span>
-            </div>
-        </section>
-
-        <!-- Mentions -->
-        <footer class="footer">
-            <p>e-histgeo, site pédagogique de M. PLANCHOT-GEFFARD. Tous droits réservés.</p>
-        </footer>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
