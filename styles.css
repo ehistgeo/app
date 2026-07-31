@@ -9,12 +9,12 @@
     /* Écart de référence entre deux tuiles voisines */
     --tile-gap: 12px;
     --stack-gap: var(--tile-gap);
-    /* Respiration ajoutée sous le texte d'accueil */
-    --group-space: 8px;
-    /* Détachement plus marqué entre la grille de classes et le bloc « Autres liens » */
-    --group-space-lg: 20px;
+    /* Respiration au-dessus d'un titre de groupe (« Mes cours », « Autres liens ») */
+    --group-space: 20px;
     /* Recul du logo par rapport au haut de la page */
     --top-space: 48px;
+    /* Hauteur réduite des tuiles ENT et Pearltrees */
+    --link-height: 52px;
     /* Fond bleu très clair */
     --bg: #e7f0fb;
     /* Bleu des 4 tuiles de classe : contraste 5,2:1 avec le texte blanc (WCAG AA) */
@@ -85,10 +85,10 @@ body {
 
 /* Détache la grille de classes du bloc « Autres liens » */
 .section-classes {
-    margin-bottom: var(--group-space-lg);
+    margin-bottom: var(--group-space);
 }
 
-/* Titre du bloc ENT / Pearltrees */
+/* Titres de groupe : « Mes cours » et « Autres liens » */
 .group-title {
     text-align: center;
     color: #000;
@@ -139,10 +139,13 @@ body {
     background: var(--tile-blue-hover);
 }
 
-/* ENT & Pearltrees Buttons : gris clair */
-.button-link {
+/* ENT & Pearltrees Buttons : gris clair, tuiles plus basses.
+   Double classe pour rester prioritaire sur les .button des media queries. */
+.button.button-link {
     font-size: 0.95em;
     width: 100%;
+    min-height: var(--link-height);
+    padding: 12px;
     background: var(--tile-grey);
     color: var(--tile-grey-text);
 }
@@ -155,8 +158,9 @@ body {
 @media (max-width: 480px) {
     :root {
         --tile-gap: 10px;
-        --group-space: 8px;
+        --group-space: 18px;
         --top-space: 40px;
+        --link-height: 50px;
     }
 
     .app {
@@ -185,9 +189,9 @@ body {
 @media (max-height: 700px) {
     :root {
         --tile-gap: 10px;
-        --group-space: 6px;
-        --group-space-lg: 12px;
+        --group-space: 12px;
         --top-space: 28px;
+        --link-height: 46px;
     }
 
     .app {
