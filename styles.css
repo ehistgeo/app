@@ -12,6 +12,13 @@
     --stack-gap: var(--tile-gap);
     /* Recul du logo par rapport au haut de la page */
     --top-space: 48px;
+    /* Fond bleu très clair */
+    --bg: #e7f0fb;
+    /* Gris unique des tuiles : contraste 4,7:1 avec le texte blanc (WCAG AA) */
+    --tile: #737373;
+    --tile-hover: #626262;
+    /* Texte de l'en-tête, lisible sur fond clair */
+    --text: #1f2937;
 }
 
 html, body {
@@ -21,7 +28,7 @@ html, body {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    background: #667eea;
+    background: var(--bg);
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -41,7 +48,7 @@ body {
 /* Header */
 .header {
     text-align: center;
-    color: white;
+    color: var(--text);
     flex-shrink: 0;
 }
 
@@ -72,7 +79,7 @@ body {
     gap: var(--tile-gap);
 }
 
-/* Buttons */
+/* Buttons : gris identique pour toutes les tuiles */
 .button {
     padding: 18px;
     border: none;
@@ -81,13 +88,19 @@ body {
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
+    background: var(--tile);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 65px;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.button:hover {
+    background: var(--tile-hover);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
 .button:active {
@@ -96,27 +109,13 @@ body {
 
 /* Class Buttons */
 .button-class {
-    background: rgba(255, 255, 255, 0.95);
-    color: #333;
     font-size: 1em;
-}
-
-.button-class:hover {
-    background: white;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* ENT & Pearltrees Buttons */
 .button-link {
-    background: #8b8b8b;
     font-size: 0.95em;
     width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.button-link:hover {
-    background: #9a9a9a;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive */
