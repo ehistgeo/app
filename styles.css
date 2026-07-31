@@ -14,7 +14,7 @@
      identique pour « Vos cours » et « Vos ressources ». */
   --space-group:clamp(10px,3.2svh,26px);
   --logo:clamp(50px,7.8svh,66px);
-  --fs-welcome:15px;
+  --fs-welcome:15px; --fw-welcome:700;
   /* La deuxième ligne d'accueil doit tenir sur une seule ligne à toute largeur :
      13 px dès ~390 px de large, réduite en dessous pour éviter le retour. */
   --fs-welcome-sub:min(13px,calc(3.75vw - 1.5px));
@@ -34,8 +34,8 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .page{width:100%;max-width:var(--maxw);display:flex;flex-direction:column;gap:var(--gap-block)}
 .hero{display:flex;flex-direction:column;align-items:center;gap:var(--gap-hero)}
 .logo{width:auto;height:var(--logo);display:block}
-.welcome{margin:0;text-align:center;text-wrap:pretty;font-size:var(--fs-welcome);line-height:1.35;color:var(--ink)}
-.welcome--sub{color:var(--muted);font-size:var(--fs-welcome-sub)}
+.welcome{margin:0;text-align:center;text-wrap:pretty;font-size:var(--fs-welcome);font-weight:var(--fw-welcome);line-height:1.35;color:var(--ink)}
+.welcome--sub{color:var(--muted);font-size:var(--fs-welcome-sub);font-weight:400}
 .group{margin:var(--space-group) 0 0;text-align:center;font-family:var(--font-title);font-size:var(--fs-group);
   font-weight:var(--fw-group);letter-spacing:var(--ls-group);text-transform:var(--tt-group);color:var(--group-ink)}
 .grid{display:grid;gap:var(--gap-tile)}
