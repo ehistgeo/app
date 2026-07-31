@@ -6,17 +6,20 @@
 }
 
 :root {
-    /* Écart de référence : identique entre les tuiles de la grille, l'en-tête,
-       la grille de classes, la tuile ENT et la tuile Pearltrees */
+    /* Écart de référence entre deux tuiles voisines */
     --tile-gap: 12px;
     --stack-gap: var(--tile-gap);
+    /* Respiration ajoutée sous le texte d'accueil et sous la grille de classes */
+    --group-space: 8px;
     /* Recul du logo par rapport au haut de la page */
     --top-space: 48px;
     /* Fond bleu très clair */
     --bg: #e7f0fb;
-    /* Gris unique des tuiles : contraste 4,7:1 avec le texte blanc (WCAG AA) */
-    --tile: #737373;
-    --tile-hover: #626262;
+    /* Gris rocher des tuiles : contraste 4,6:1 avec le texte blanc (WCAG AA) */
+    --tile: #70757a;
+    --tile-hover: #5c6165;
+    /* Contour gris foncé des tuiles */
+    --tile-border: #3f4448;
     /* Texte de l'en-tête, lisible sur fond clair */
     --text: #1f2937;
 }
@@ -50,6 +53,7 @@ body {
     text-align: center;
     color: var(--text);
     flex-shrink: 0;
+    margin-bottom: var(--group-space);
 }
 
 .logo {
@@ -72,6 +76,11 @@ body {
     flex-direction: column;
 }
 
+/* Détache la grille de classes du bloc ENT / Pearltrees */
+.section-classes {
+    margin-bottom: var(--group-space);
+}
+
 /* Grid */
 .grid {
     display: grid;
@@ -79,10 +88,10 @@ body {
     gap: var(--tile-gap);
 }
 
-/* Buttons : gris identique pour toutes les tuiles */
+/* Buttons : gris rocher et contour gris foncé identiques pour toutes les tuiles */
 .button {
     padding: 18px;
-    border: none;
+    border: 2px solid var(--tile-border);
     border-radius: 12px;
     font-size: 0.95em;
     font-weight: 600;
@@ -122,6 +131,7 @@ body {
 @media (max-width: 480px) {
     :root {
         --tile-gap: 10px;
+        --group-space: 8px;
         --top-space: 40px;
     }
 
@@ -151,6 +161,7 @@ body {
 @media (max-height: 700px) {
     :root {
         --tile-gap: 10px;
+        --group-space: 6px;
         --top-space: 28px;
     }
 
