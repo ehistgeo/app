@@ -20,10 +20,9 @@
     /* Bleu des 4 tuiles de classe : contraste 5,2:1 avec le texte blanc (WCAG AA) */
     --tile-blue: #2f6fb5;
     --tile-blue-hover: #275d99;
-    /* Gris clair des tuiles ENT et Pearltrees. Texte blanc demandé : contraste
-       3,4:1, en dessous du seuil WCAG AA de 4,5:1 pour ce corps de texte. */
-    --tile-grey: #868b90;
-    --tile-grey-hover: #767b80;
+    /* Gris des tuiles ENT et Pearltrees : contraste 4,6:1 avec le texte blanc (WCAG AA) */
+    --tile-grey: #70757a;
+    --tile-grey-hover: #5c6165;
     --tile-grey-text: #ffffff;
     /* Contour gris foncé des tuiles */
     --tile-border: #3f4448;
