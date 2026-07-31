@@ -6,7 +6,11 @@
     <title>e-histgeo</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#12335C">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="e-histgeo">
@@ -45,5 +49,15 @@
         <footer class="mentions">e-histgeo, app pédagogique de M. PLANCHOT-GEFFARD. Tous droits réservés.</footer>
 
     </div>
+
+    <!-- Seul script de la page : il n'intervient pas dans le rendu, il installe
+         le cache hors ligne et rend l'app installable sur l'écran d'accueil. -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            addEventListener('load', function () {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
 </body>
 </html>

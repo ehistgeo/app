@@ -1,0 +1,57 @@
+// Service worker du portail e-histgeo.
+// Stratégie : le cache répond d'abord, le réseau rafraîchit en arrière-plan.
+// L'app s'ouvre donc instantanément et hors ligne, et se met à jour à la visite suivante.
+// Incrémenter CACHE à chaque changement de la liste ASSETS.
+
+const CACHE = 'ehistgeo-v1';
+
+const ASSETS = [
+  './',
+  './index.html',
+  './styles.css',
+  './manifest.json',
+  './e-histgeo%20logo.png',
+  './favicon-32.png',
+  './apple-touch-icon.png',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-maskable-512.png'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(cache => cache.addAll(ASSETS))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
+  if (new URL(request.url).origin !== self.location.origin) return;
+
+  event.respondWith(
+    caches.match(request, { ignoreSearch: true }).then(cached => {
+      const fromNetwork = fetch(request)
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => cached || caches.match('./index.html'));
+
+      return cached || fromNetwork;
+    })
+  );
+});
