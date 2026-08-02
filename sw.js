@@ -3,12 +3,13 @@
 // L'app s'ouvre donc instantanément et hors ligne, et se met à jour à la visite suivante.
 // Incrémenter CACHE à chaque changement de la liste ASSETS.
 
-const CACHE = 'ehistgeo-v2';
+const CACHE = 'ehistgeo-v3';
 
 const ASSETS = [
   './',
   './index.html',
   './styles.css',
+  './app.js',
   './manifest.json',
   './logo-200.png',
   './favicon-32.png',

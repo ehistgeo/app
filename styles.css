@@ -102,6 +102,38 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--vide{background:transparent;border-style:dashed;color:var(--muted)}
 .tile:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
+/* Texte réservé aux lecteurs d'écran */
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Classe de l'élève, retenue sur son appareil : liseré cyan du logo */
+.est-ma-classe{position:relative;overflow:hidden}
+.est-ma-classe::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--cyan)}
+
+/* Nouveauté signalée par data-nouveau : pastille magenta */
+.est-nouveau{position:relative}
+.est-nouveau::after{content:"";position:absolute;top:7px;right:7px;width:8px;height:8px;
+  border-radius:50%;background:var(--magenta);box-shadow:0 0 0 2px var(--surface)}
+
+/* Invitation à installer l'app, insérée par le script. Barre flottante et non
+   bloc dans le flux : sur un écran déjà rempli au pixel, un bloc supplémentaire
+   provoquerait un défilement. Elle recouvre brièvement le bas de page. */
+.invite{position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:var(--maxw);z-index:10;
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+  border:1px solid var(--line);border-bottom:0;
+  border-radius:var(--radius) var(--radius) 0 0;
+  background:var(--surface);box-shadow:0 -4px 14px rgba(19,16,24,.10)}
+.invite__texte{margin:0;flex:1;font-size:11px;line-height:1.35;color:var(--muted);text-wrap:pretty}
+.invite__action{flex:0 0 auto;min-height:32px;padding:0 12px;border:0;border-radius:8px;
+  background:var(--bleu);color:#fff;font:600 12px/1 var(--font);cursor:pointer}
+.invite__action:hover{background:var(--bleu-deep)}
+.invite__fermer{flex:0 0 auto;width:28px;height:28px;padding:0;border:0;border-radius:8px;
+  background:transparent;color:var(--muted);font:400 18px/1 var(--font);cursor:pointer}
+.invite__fermer:hover{color:var(--ink)}
+.invite__action:focus-visible,.invite__fermer:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+
 /* Sous 360 px, le pictogramme ferait passer les libellés longs sur deux lignes */
 @media (max-width:359px){.tile-ico{display:none}}
 
