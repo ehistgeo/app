@@ -1,7 +1,7 @@
 {
   "name": "e-histgeo",
   "short_name": "e-histgeo",
-  "description": "Portail pédagogique e-histgeo - Accès aux cours et ressources",
+  "description": "App pédagogique e-histgeo - Accès aux cours et ressources",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ECEFF4",
