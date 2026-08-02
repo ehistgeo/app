@@ -8,21 +8,40 @@
   --magenta:#D6157E; --cyan:#6EC9EE;
   --line:#CBD3DD; --group-ink:#4C5A68;
   --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --font-title:var(--font);
-  --maxw:600px; --pad-x:18px; --pad-y:clamp(12px,2.4svh,22px);
-  --gap-block:clamp(10px,1.8svh,16px); --gap-hero:8px; --gap-tile:10px;
+  /* Les sept valeurs indexées sur la hauteur d'écran sont d'abord exprimées en
+     vh, unité universelle, puis redéfinies en svh plus bas sous @supports.
+     Un doublon de déclaration ne suffirait pas : une variable personnalisée
+     accepte n'importe quelle valeur à la déclaration, l'unité inconnue ne se
+     révèle invalide qu'à l'usage, et la propriété est alors abandonnée. */
+  --maxw:600px; --pad-x:18px; --pad-y:clamp(12px,2.4vh,22px);
+  --gap-block:clamp(10px,1.8vh,16px); --gap-hero:8px; --gap-tile:10px;
   /* Respiration supplémentaire au-dessus des deux titres de groupe,
      identique pour « Vos cours » et « Vos ressources ». */
-  --space-group:clamp(10px,3.2svh,26px);
-  --logo:clamp(50px,7.8svh,66px);
+  --space-group:clamp(10px,3.2vh,26px);
+  --logo:clamp(50px,7.8vh,66px);
   --fs-welcome:15px; --fw-welcome:700;
   /* La deuxième ligne d'accueil doit tenir sur une seule ligne à toute largeur :
      13 px dès ~390 px de large, réduite en dessous pour éviter le retour. */
   --fs-welcome-sub:min(13px,calc(3.75vw - 1.5px));
   --fs-group:12px; --fw-group:600; --ls-group:.09em; --tt-group:uppercase;
-  --h-cours:clamp(62px,10svh,84px); --fs-cours:clamp(17px,4.4vw,21px); --fw-cours:600; --ls-cours:.005em;
-  --h-ent:clamp(50px,7.6svh,64px); --fs-ent:17px; --fw-ent:600; --ls-ent:.02em;
-  --h-lien:clamp(46px,6.6svh,58px); --fs-lien:13px; --fw-lien:500;
+  --h-cours:clamp(62px,10vh,84px); --fs-cours:clamp(17px,4.4vw,21px); --fw-cours:600; --ls-cours:.005em;
+  --h-ent:clamp(50px,7.6vh,64px); --fs-ent:17px; --fw-ent:600; --ls-ent:.02em;
+  --h-lien:clamp(46px,6.6vh,58px); --fs-lien:13px; --fw-lien:500;
   --fs-mentions:11px; --radius:10px;
+}
+
+/* Navigateurs récents : svh, la hauteur d'écran hors barres du navigateur.
+   Chrome 108, Safari 15.4 et Firefox 101 ou ultérieurs. */
+@supports (height:1svh){
+  :root{
+    --pad-y:clamp(12px,2.4svh,22px);
+    --gap-block:clamp(10px,1.8svh,16px);
+    --space-group:clamp(10px,3.2svh,26px);
+    --logo:clamp(50px,7.8svh,66px);
+    --h-cours:clamp(62px,10svh,84px);
+    --h-ent:clamp(50px,7.6svh,64px);
+    --h-lien:clamp(46px,6.6svh,58px);
+  }
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -86,7 +105,15 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Sous 360 px, le pictogramme ferait passer les libellés longs sur deux lignes */
 @media (max-width:359px){.tile-ico{display:none}}
 
+/* Écrans courts : valeurs fixes, l'indexation sur la hauteur n'a plus de sens */
 @media (max-height:620px){:root{
   --pad-y:8px; --gap-block:6px; --gap-hero:4px; --space-group:6px;
   --logo:40px; --h-cours:54px; --h-ent:46px; --h-lien:44px;
   --fs-welcome:14px; --fs-welcome-sub:min(11px,calc(3.75vw - 1.5px)); --fs-mentions:10px;}}
+
+/* Très courts, typiquement une fenêtre écrasée ou un mode paysage : on resserre
+   encore, sans jamais descendre sous les 44 px de cible tactile. */
+@media (max-height:520px){:root{
+  --pad-y:6px; --tile-gap:8px; --gap-block:5px; --gap-hero:3px; --space-group:4px;
+  --logo:32px; --h-cours:48px; --h-ent:44px; --h-lien:44px;
+  --fs-welcome:13px; --fs-mentions:10px;}}
