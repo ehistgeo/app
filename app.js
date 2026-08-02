@@ -47,7 +47,10 @@
   /* Pour signaler une mise à jour, ajoutez data-nouveau="…" sur une tuile,
      avec une valeur quelconque qui change à chaque nouvelle annonce, par
      exemple data-nouveau="2026-09". La pastille disparaît dès que l'élève
-     ouvre la tuile, et revient si vous changez la valeur. */
+     ouvre la tuile, et revient si vous changez la valeur.
+     Une fois la classe connue, les nouveautés des autres classes ne sont plus
+     signalées : elles ne concernent pas cet élève. Tant qu'aucune classe n'est
+     retenue, toutes sont signalées, pour ne rien lui cacher. */
 
   var vus = {};
   try { vus = JSON.parse(lire(CLE_VUS) || '{}') || {}; } catch (e) { vus = {}; }
@@ -56,6 +59,9 @@
     var cle = tuile.getAttribute('data-classe') || tuile.textContent.trim();
     var version = tuile.getAttribute('data-nouveau');
     if (vus[cle] === version) return;
+
+    var estUnCours = tuile.classList.contains('tile--cours');
+    if (estUnCours && maClasse && tuile.getAttribute('data-classe') !== maClasse) return;
 
     tuile.classList.add('est-nouveau');
     var mention = document.createElement('span');
