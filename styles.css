@@ -52,8 +52,12 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   -webkit-font-smoothing:antialiased}
 .page{width:100%;max-width:var(--maxw);display:flex;flex-direction:column;gap:var(--gap-block)}
 .hero{display:flex;flex-direction:column;align-items:center;gap:var(--gap-hero)}
-/* Le logo est un lien vers la page elle-même : un appui la recharge */
-.logo-link{display:block;border-radius:8px;transition:opacity .14s ease}
+/* Le logo est un lien vers la page elle-même : un appui la recharge.
+   Le ::after élargit la zone d'appui à 44 px sans occuper de place dans la
+   mise en page, le logo pouvant descendre à 32 px sur écran court. */
+.logo-link{position:relative;display:block;border-radius:8px;transition:opacity .14s ease}
+.logo-link::after{content:"";position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);width:44px;height:44px}
 .logo-link:hover{opacity:.85}
 .logo-link:active{opacity:.7}
 .logo-link:focus-visible{outline:3px solid var(--magenta);outline-offset:4px}
@@ -126,11 +130,12 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   border-radius:var(--radius) var(--radius) 0 0;
   background:var(--surface);box-shadow:0 -4px 14px rgba(19,16,24,.10)}
 .invite__texte{margin:0;flex:1;font-size:11px;line-height:1.35;color:var(--muted);text-wrap:pretty}
-.invite__action{flex:0 0 auto;min-height:32px;padding:0 12px;border:0;border-radius:8px;
-  background:var(--bleu);color:#fff;font:600 12px/1 var(--font);cursor:pointer}
+/* Les deux boutons respectent les 44 px de cible tactile */
+.invite__action{flex:0 0 auto;min-height:44px;padding:0 14px;border:0;border-radius:8px;
+  background:var(--bleu);color:#fff;font:600 13px/1 var(--font);cursor:pointer}
 .invite__action:hover{background:var(--bleu-deep)}
-.invite__fermer{flex:0 0 auto;width:28px;height:28px;padding:0;border:0;border-radius:8px;
-  background:transparent;color:var(--muted);font:400 18px/1 var(--font);cursor:pointer}
+.invite__fermer{flex:0 0 auto;width:44px;height:44px;padding:0;border:0;border-radius:8px;
+  background:transparent;color:var(--muted);font:400 20px/1 var(--font);cursor:pointer}
 .invite__fermer:hover{color:var(--ink)}
 .invite__action:focus-visible,.invite__fermer:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
