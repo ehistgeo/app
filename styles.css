@@ -20,9 +20,9 @@
   --space-group:clamp(10px,3.2vh,26px);
   --logo:clamp(50px,7.8vh,66px);
   --fs-welcome:15px; --fw-welcome:700;
-  /* La deuxième ligne d'accueil doit tenir sur une seule ligne à toute largeur :
-     13 px dès ~390 px de large, réduite en dessous pour éviter le retour. */
-  --fs-welcome-sub:min(13px,calc(3.75vw - 1.5px));
+  /* La deuxième ligne d'accueil se replie librement : avec 83 caractères, la
+     contraindre sur une seule ligne imposerait un corps de 10 px, illisible. */
+  --fs-welcome-sub:13px;
   --fs-group:12px; --fw-group:600; --ls-group:.09em; --tt-group:uppercase;
   --h-cours:clamp(62px,10vh,84px); --fs-cours:clamp(17px,4.4vw,21px); --fw-cours:600; --ls-cours:.005em;
   --h-ent:clamp(50px,7.6vh,64px); --fs-ent:17px; --fw-ent:600; --ls-ent:.02em;
@@ -166,11 +166,16 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Sous 360 px, le pictogramme ferait passer les libellés longs sur deux lignes */
 @media (max-width:359px){.tile-ico{display:none}}
 
+/* Écrans un peu justes, autour de 640 px de haut : la deuxième ligne d'accueil
+   y occupe deux lignes, on récupère la hauteur sur les écarts et le logo. */
+@media (max-height:660px){:root{
+  --gap-block:10px; --space-group:16px; --logo:46px;}}
+
 /* Écrans courts : valeurs fixes, l'indexation sur la hauteur n'a plus de sens */
 @media (max-height:620px){:root{
   --pad-y:8px; --gap-block:6px; --gap-hero:4px; --space-group:6px;
   --logo:40px; --h-cours:54px; --h-ent:46px; --h-lien:44px;
-  --fs-welcome:14px; --fs-welcome-sub:min(11px,calc(3.75vw - 1.5px)); --fs-mentions:10px;}}
+  --fs-welcome:14px; --fs-welcome-sub:11px; --fs-mentions:10px;}}
 
 /* Très courts, typiquement une fenêtre écrasée ou un mode paysage : on resserre
    encore, sans jamais descendre sous les 44 px de cible tactile. */
