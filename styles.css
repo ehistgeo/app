@@ -123,8 +123,10 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .doc__date{color:var(--muted);font-size:.8em}
 .doc__retour{display:inline-flex;align-items:center;min-height:44px;font-size:.9em;font-weight:600}
 
-/* Lien vers les mentions, dans le pied de page */
-.mentions__lien{color:var(--muted);text-underline-offset:2px}
+/* Lien vers les mentions, sur sa propre ligne sous le pied de page.
+   Le remplissage porte la zone d'appui à 24 px, minimum WCAG 2.2 AA. */
+.mentions p{margin:0}
+.mentions__lien{display:inline-block;padding:5px 6px;color:var(--muted);text-underline-offset:2px}
 .mentions__lien:hover{color:var(--ink)}
 .mentions__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
