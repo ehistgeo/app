@@ -3,8 +3,12 @@
 // L'app s'ouvre donc instantanément et hors ligne, et se met à jour à la visite suivante.
 // Incrémenter CACHE à chaque changement de la liste ASSETS.
 
-const CACHE = 'ehistgeo-v10';
+const CACHE = 'ehistgeo-v11';
 
+/* Seuls les fichiers dont la page a besoin pour s'afficher. Les icônes du
+   manifeste ne sont pas préchargées : le navigateur ne les demande qu'au moment
+   d'installer l'app, et le gestionnaire fetch les mettra en cache alors.
+   Logo.png reste au dépôt comme original mais n'est jamais servi aux élèves. */
 const ASSETS = [
   './',
   './index.html',
@@ -12,8 +16,8 @@ const ASSETS = [
   './styles.css',
   './app.js',
   './manifest.json',
-  './favicon-32.png',
-  './Logo.png'
+  './logo-160.png',
+  './favicon-32.png'
 ];
 
 self.addEventListener('install', event => {
