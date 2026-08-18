@@ -3,7 +3,7 @@
 // L'app s'ouvre donc instantanément et hors ligne, et se met à jour à la visite suivante.
 // Incrémenter CACHE à chaque changement de la liste ASSETS.
 
-const CACHE = 'ehistgeo-v5';
+const CACHE = 'ehistgeo-v6';
 
 const ASSETS = [
   './',
@@ -13,7 +13,7 @@ const ASSETS = [
   './app.js',
   './manifest.json',
   './logo-200.png',
-  './favicon-32.png',
+  './favicon-32-v2.png',
   './apple-touch-icon.png',
   './icon-192.png',
   './icon-512.png',
