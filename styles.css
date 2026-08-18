@@ -18,7 +18,7 @@
   /* Respiration supplémentaire au-dessus des deux titres de groupe,
      identique pour « Vos cours » et « Vos ressources ». */
   --space-group:clamp(10px,3.2vh,26px);
-  --logo:clamp(50px,7.8vh,66px);
+  --logo:clamp(57.5px,8.97vh,75.9px);
   --fs-welcome:15px; --fw-welcome:700;
   /* La deuxième ligne d'accueil se replie librement : avec 83 caractères, la
      contraindre sur une seule ligne imposerait un corps de 10 px, illisible. */
@@ -37,7 +37,7 @@
     --pad-y:clamp(12px,2.4svh,22px);
     --gap-block:clamp(10px,1.8svh,16px);
     --space-group:clamp(10px,3.2svh,26px);
-    --logo:clamp(50px,7.8svh,66px);
+    --logo:clamp(57.5px,8.97svh,75.9px);
     --h-cours:clamp(62px,10svh,84px);
     --h-ent:clamp(50px,7.6svh,64px);
     --h-lien:clamp(46px,6.6svh,58px);
@@ -77,7 +77,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile{display:flex;align-items:center;justify-content:center;text-align:center;
   text-decoration:none;min-height:44px;padding:6px 8px;line-height:1.15;
   transition:transform .14s ease, background-color .14s ease, box-shadow .14s ease, border-color .14s ease, color .14s ease}
-.tile--cours{min-height:var(--h-cours);font-family:var(--font-title);font-size:var(--fs-cours);font-weight:var(--fw-cours);letter-spacing:var(--ls-cours);gap:.3em}
+.tile--cours{min-height:var(--h-cours);font-family:var(--font-title);font-size:var(--fs-cours);font-weight:var(--fw-cours);letter-spacing:.3em}
 /* Pictogramme carnet : coloré par le libellé, et calibré pour que sa hauteur
    d'encre égale la hauteur des capitales. Le décalage vertical aligne son axe
    sur l'axe optique des capitales, qui n'ont pas de jambage descendant. */
@@ -169,17 +169,17 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Écrans un peu justes, autour de 640 px de haut : la deuxième ligne d'accueil
    y occupe deux lignes, on récupère la hauteur sur les écarts et le logo. */
 @media (max-height:660px){:root{
-  --gap-block:10px; --space-group:16px; --logo:46px;}}
+  --gap-block:10px; --space-group:16px; --logo:52.9px;}}
 
 /* Écrans courts : valeurs fixes, l'indexation sur la hauteur n'a plus de sens */
 @media (max-height:620px){:root{
   --pad-y:8px; --gap-block:6px; --gap-hero:4px; --space-group:6px;
-  --logo:40px; --h-cours:54px; --h-ent:46px; --h-lien:44px;
+  --logo:46px; --h-cours:54px; --h-ent:46px; --h-lien:44px;
   --fs-welcome:14px; --fs-welcome-sub:11px; --fs-mentions:10px;}}
 
 /* Très courts, typiquement une fenêtre écrasée ou un mode paysage : on resserre
    encore, sans jamais descendre sous les 44 px de cible tactile. */
 @media (max-height:520px){:root{
   --pad-y:6px; --tile-gap:8px; --gap-block:5px; --gap-hero:3px; --space-group:4px;
-  --logo:32px; --h-cours:48px; --h-ent:44px; --h-lien:44px;
+  --logo:36.8px; --h-cours:48px; --h-ent:44px; --h-lien:44px;
   --fs-welcome:13px; --fs-mentions:10px;}}
