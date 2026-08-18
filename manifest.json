@@ -3,31 +3,23 @@
   "short_name": "e-histgeo",
   "description": "App pédagogique e-histgeo - Accès aux cours et ressources",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ECEFF4",
   "theme_color": "#12335C",
-  "scope": "./",
   "icons": [
-  {
-    "src": "logo-200.png",
-    "sizes": "200x200",
-    "type": "image/png",
-    "purpose": "any"
-  },
-  {
-    "src": "Logo.png",
-    "sizes": "512x512",
-    "type": "image/png",
-    "purpose": "any"
-  }
-]
-  "categories": ["education"],
-  "screenshots": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23ECEFF4' width='540' height='720'/></svg>",
-      "sizes": "540x720",
-      "type": "image/svg+xml",
-      "form_factor": "narrow"
+      "src": "logo-200.png",
+      "sizes": "200x200",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "Logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
-  ]
+  ],
+  "categories": ["education"]
 }
