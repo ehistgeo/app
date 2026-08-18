@@ -77,7 +77,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile{display:flex;align-items:center;justify-content:center;text-align:center;
   text-decoration:none;min-height:44px;padding:6px 8px;line-height:1.15;
   transition:transform .14s ease, background-color .14s ease, box-shadow .14s ease, border-color .14s ease, color .14s ease}
-.tile--cours{min-height:var(--h-cours);font-family:var(--font-title);font-size:var(--fs-cours);font-weight:var(--fw-cours);letter-spacing:.3em}
+.tile--cours{min-height:var(--h-cours);font-family:var(--font-title);font-size:var(--fs-cours);font-weight:var(--fw-cours);letter-spacing:var(--ls-cours)}
 /* Pictogramme carnet : coloré par le libellé, et calibré pour que sa hauteur
    d'encre égale la hauteur des capitales. Le décalage vertical aligne son axe
    sur l'axe optique des capitales, qui n'ont pas de jambage descendant. */
