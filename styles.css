@@ -14,11 +14,11 @@
      accepte n'importe quelle valeur à la déclaration, l'unité inconnue ne se
      révèle invalide qu'à l'usage, et la propriété est alors abandonnée. */
   --maxw:600px; --pad-x:18px; --pad-y:clamp(12px,2.4vh,22px);
-  --gap-block:clamp(10px,1.8vh,16px); --gap-hero:8px; --gap-tile:10px;
+  --gap-block:clamp(10px,1.65vh,16px); --gap-hero:8px; --gap-tile:10px;
   /* Respiration supplémentaire au-dessus des deux titres de groupe,
      identique pour « Vos cours » et « Vos ressources ». */
   --space-group:clamp(10px,3.2vh,26px);
-  --logo:clamp(57.5px,8.97vh,75.9px);
+  --logo:clamp(58px,9vh,76px);
   --fs-welcome:15px; --fw-welcome:700;
   /* La deuxième ligne d'accueil se replie librement : avec 83 caractères, la
      contraindre sur une seule ligne imposerait un corps de 10 px, illisible. */
@@ -35,9 +35,9 @@
 @supports (height:1svh){
   :root{
     --pad-y:clamp(12px,2.4svh,22px);
-    --gap-block:clamp(10px,1.8svh,16px);
+    --gap-block:clamp(10px,1.65svh,16px);
     --space-group:clamp(10px,3.2svh,26px);
-    --logo:clamp(57.5px,8.97svh,75.9px);
+    --logo:clamp(58px,9svh,76px);
     --h-cours:clamp(62px,10svh,84px);
     --h-ent:clamp(50px,7.6svh,64px);
     --h-lien:clamp(46px,6.6svh,58px);
@@ -78,10 +78,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   text-decoration:none;min-height:44px;padding:6px 8px;line-height:1.15;
   transition:transform .14s ease, background-color .14s ease, box-shadow .14s ease, border-color .14s ease, color .14s ease}
 .tile--cours{min-height:var(--h-cours);font-family:var(--font-title);font-size:var(--fs-cours);font-weight:var(--fw-cours);letter-spacing:var(--ls-cours)}
-/* Pictogramme carnet : coloré par le libellé, et calibré pour que sa hauteur
-   d'encre égale la hauteur des capitales. Le décalage vertical aligne son axe
-   sur l'axe optique des capitales, qui n'ont pas de jambage descendant. */
-.tile-ico{width:.95em;height:.95em;flex:0 0 auto;opacity:.92;transform:translateY(.065em)}
 /* Tuiles à contour : ENT et Lycée. Libellés en capitales. */
 .tile--cadre{min-height:var(--h-ent);font-family:var(--font-title);font-size:var(--fs-ent);font-weight:var(--fw-ent);letter-spacing:var(--ls-ent);text-transform:uppercase}
 .tile--lien{min-height:var(--h-lien);font-size:var(--fs-lien);font-weight:var(--fw-lien)}
@@ -163,13 +159,10 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .invite__fermer:hover{color:var(--ink)}
 .invite__action:focus-visible,.invite__fermer:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
-/* Sous 360 px, le pictogramme ferait passer les libellés longs sur deux lignes */
-@media (max-width:359px){.tile-ico{display:none}}
-
 /* Écrans un peu justes, autour de 640 px de haut : la deuxième ligne d'accueil
    y occupe deux lignes, on récupère la hauteur sur les écarts et le logo. */
 @media (max-height:660px){:root{
-  --gap-block:10px; --space-group:16px; --logo:52.9px;}}
+  --gap-block:10px; --space-group:16px; --logo:53px;}}
 
 /* Écrans courts : valeurs fixes, l'indexation sur la hauteur n'a plus de sens */
 @media (max-height:620px){:root{
@@ -180,6 +173,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Très courts, typiquement une fenêtre écrasée ou un mode paysage : on resserre
    encore, sans jamais descendre sous les 44 px de cible tactile. */
 @media (max-height:520px){:root{
-  --pad-y:6px; --tile-gap:8px; --gap-block:5px; --gap-hero:3px; --space-group:4px;
-  --logo:36.8px; --h-cours:48px; --h-ent:44px; --h-lien:44px;
+  --pad-y:6px; --tile-gap:8px; --gap-block:4px; --gap-hero:3px; --space-group:4px;
+  --logo:37px; --h-cours:48px; --h-ent:44px; --h-lien:44px;
   --fs-welcome:13px; --fs-mentions:10px;}}
