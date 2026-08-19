@@ -1,2 +1,2 @@
 # e-histgeo app
-Il s'agit d'une "application web" qui vise à donner aux élèves un portail unique pour accéder à mes ressources cours en Histoire-Géographie & EMC lycée.
+Il s'agit d'une PWA qui vise à donner aux élèves un portail unique pour accéder à mes ressources cours en Histoire-Géographie & EMC lycée.
