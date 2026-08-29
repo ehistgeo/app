@@ -168,8 +168,15 @@
   });
 
   if (etats.length) {
+    /* Attention : cliquer un libellé provoque DEUX clics. Le premier a pour
+       cible le libellé, le second, synthétique, a pour cible le bouton radio
+       qu'il commande. Ce dernier doit donc être reconnu ici, sans quoi le menu
+       se referme dans le geste même qui l'ouvre. */
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('.menu__liste, .menu-bouton')) fermerMenus();
+      var cible = e.target;
+      if (!cible || !cible.closest) return;
+      if (cible.closest('.menu__liste, .menu-bouton, .menu-etat')) return;
+      fermerMenus();
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') fermerMenus();
