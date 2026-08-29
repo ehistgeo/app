@@ -11,6 +11,10 @@
   --accent-fond:#12335C; --accent-fond-vif:#0C2445; --accent-bord:transparent;
   --survol:#E6ECF4;
   --magenta:#D6157E; --cyan:#6EC9EE;
+  /* Anneau de focus : au marine de la charte, jamais au magenta, qui tire
+     vers le rouge sombre et se lit comme une alerte. Il se pose a l'exterieur
+     de l'element, donc sur le fond de page, ou son contraste est de 12,7:1. */
+  --focus:#12335C;
   --line:#CBD3DD; --group-ink:#4C5A68;
   /* Panneau déplié : teinte assez marquée pour se distinguer du fond,
      bord gauche au marine de la charte pour le rattacher à sa tuile. */
@@ -68,7 +72,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   transform:translate(-50%,-50%);width:44px;height:44px}
 .logo-link:hover{opacity:.85}
 .logo-link:active{opacity:.7}
-.logo-link:focus-visible{outline:3px solid var(--magenta);outline-offset:4px}
+.logo-link:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
 .logo{width:auto;height:var(--logo);display:block}
 .welcome{margin:0;text-align:center;text-wrap:pretty;font-size:var(--fs-welcome);font-weight:var(--fw-welcome);line-height:1.35;color:var(--ink)}
 .welcome--sub{color:var(--muted);font-size:var(--fs-welcome-sub);font-weight:400}
@@ -109,7 +113,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--lien:hover{border-color:var(--bleu);color:var(--bleu)}
 /* Emplacements anonymes : contour en pointillés et fond effacé */
 .tile--vide{background:transparent;border-style:dashed;color:var(--muted)}
-.tile:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.tile:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
 /* Tuiles à choix multiple. Le panneau se déplie dans la grille elle-même,
    sur toute la largeur, juste sous la rangée de la tuile ouverte. Deux colonnes,
@@ -130,20 +134,20 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   color:var(--ink);text-decoration:none;
   font-size:var(--fs-lien);font-weight:var(--fw-lien);line-height:1.15}
 .menu__lien:hover{border-color:var(--bleu);color:var(--bleu);background:var(--survol)}
-.menu__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:-3px}
+.menu__lien:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
 
 #etat-orientation:checked ~ #liste-orientation{display:grid}
 #etat-orientation:checked ~ .menu-bouton[for="etat-orientation"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
-#etat-orientation:focus-visible ~ .menu-bouton[for="etat-orientation"]{outline:3px solid var(--magenta);outline-offset:2px}
+#etat-orientation:focus-visible ~ .menu-bouton[for="etat-orientation"]{outline:3px solid var(--focus);outline-offset:2px}
 #etat-hggsp:checked ~ #liste-hggsp{display:grid}
 #etat-hggsp:checked ~ .menu-bouton[for="etat-hggsp"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
-#etat-hggsp:focus-visible ~ .menu-bouton[for="etat-hggsp"]{outline:3px solid var(--magenta);outline-offset:2px}
+#etat-hggsp:focus-visible ~ .menu-bouton[for="etat-hggsp"]{outline:3px solid var(--focus);outline-offset:2px}
 #etat-informer:checked ~ #liste-informer{display:grid}
 #etat-informer:checked ~ .menu-bouton[for="etat-informer"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
-#etat-informer:focus-visible ~ .menu-bouton[for="etat-informer"]{outline:3px solid var(--magenta);outline-offset:2px}
+#etat-informer:focus-visible ~ .menu-bouton[for="etat-informer"]{outline:3px solid var(--focus);outline-offset:2px}
 #etat-regarder:checked ~ #liste-regarder{display:grid}
 #etat-regarder:checked ~ .menu-bouton[for="etat-regarder"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
-#etat-regarder:focus-visible ~ .menu-bouton[for="etat-regarder"]{outline:3px solid var(--magenta);outline-offset:2px}
+#etat-regarder:focus-visible ~ .menu-bouton[for="etat-regarder"]{outline:3px solid var(--focus);outline-offset:2px}
 
 /* Sous 360 px, deux colonnes couperaient les libellés les plus longs */
 @media (max-width:359px){.menu__liste{grid-template-columns:1fr}}
@@ -162,7 +166,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --bg:#0B1320; --surface:#1A2739; --ink:#E9EEF6; --muted:#A3B3C7;
   --bleu:#7FB2E6; --bleu-deep:#A8CCF2; --bleu-ink:#FFFFFF;
   --accent-fond:#234878; --accent-fond-vif:#2C5891; --accent-bord:#3E6499;
-  --magenta:#FF5FA8; --cyan:#6EC9EE;
+  --magenta:#FF5FA8; --cyan:#6EC9EE; --focus:#7FB2E6;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
   --survol:#22344F;
@@ -172,7 +176,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --bg:#0B1320; --surface:#1A2739; --ink:#E9EEF6; --muted:#A3B3C7;
   --bleu:#7FB2E6; --bleu-deep:#A8CCF2; --bleu-ink:#FFFFFF;
   --accent-fond:#234878; --accent-fond-vif:#2C5891; --accent-bord:#3E6499;
-  --magenta:#FF5FA8; --cyan:#6EC9EE;
+  --magenta:#FF5FA8; --cyan:#6EC9EE; --focus:#7FB2E6;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
   --survol:#22344F;
@@ -201,7 +205,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   font-family:inherit;font-size:var(--fs-mentions);line-height:1;
   color:var(--muted)}
 .theme__b:hover{color:var(--ink)}
-.theme__b:focus-visible{outline:3px solid var(--magenta);outline-offset:1px}
+.theme__b:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
 :root:not([data-theme]) .theme__b[data-theme-choix="auto"],
 :root[data-theme="light"] .theme__b[data-theme-choix="light"],
 :root[data-theme="dark"] .theme__b[data-theme-choix="dark"]{
@@ -229,7 +233,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   background:var(--accent-fond);color:var(--bleu-ink);
   font-family:inherit;font-size:15px;font-weight:600}
 .accueil__action:hover{background:var(--accent-fond-vif)}
-.accueil__action:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.accueil__action:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 /* Sur un ecran tres bas, le message defile plutot que de deborder. */
 @media (max-height:420px){.accueil{max-height:calc(100vh - 24px);overflow-y:auto}}
 
@@ -246,7 +250,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .doc li{margin-bottom:3px}
 .doc a{color:var(--bleu);text-underline-offset:2px}
 .doc a:hover{color:var(--bleu-deep)}
-.doc a:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.doc a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .doc__date{color:var(--muted);font-size:.8em}
 .doc__retour{display:inline-flex;align-items:center;min-height:44px;font-size:.9em;font-weight:600}
 
@@ -260,7 +264,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .mentions__lien{display:inline-block;padding:5px 0;color:var(--muted);text-underline-offset:2px}
 .mentions__puce{display:inline-block;line-height:1}
 .mentions__lien:hover{color:var(--ink)}
-.mentions__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.mentions__lien:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
 /* Texte réservé aux lecteurs d'écran */
 .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
@@ -293,7 +297,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .invite__fermer{flex:0 0 auto;width:44px;height:44px;padding:0;border:0;border-radius:8px;
   background:transparent;color:var(--muted);font:400 20px/1 var(--font);cursor:pointer}
 .invite__fermer:hover{color:var(--ink)}
-.invite__action:focus-visible,.invite__fermer:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+.invite__action:focus-visible,.invite__fermer:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
 /* Écrans un peu justes, autour de 640 px de haut : la deuxième ligne d'accueil
    y occupe deux lignes, on récupère la hauteur sur les écarts et le logo. */

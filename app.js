@@ -152,6 +152,29 @@
     ecrire(CLE_INVITE, 'non');
   });
 
+  /* ---- 7. Focus retenu apres un clic -------------------------------------
+     Un lien garde le focus apres avoir ete clique. Il ne porte alors aucun
+     anneau, le navigateur sachant que le pointeur a servi. Mais si l'eleve
+     revient ensuite sur l'onglet au clavier, par Alt+Tab ou Ctrl+Tab, le
+     navigateur bascule en mode clavier et promeut ce focus retenu en
+     focus-visible : l'anneau apparait alors autour d'une tuile que personne
+     n'a atteinte au clavier. On relache donc le focus apres une activation
+     au pointeur. detail vaut 0 pour une activation au clavier, qui doit
+     conserver son focus et son anneau. */
+
+  /* Trois familles gardent le focus apres un clic : les liens qui ouvrent
+     un onglet, les boutons radio commandes par les tuiles a menu, et les
+     boutons de theme. On regarde l'element reellement focalise, car cliquer
+     un libelle deplace le focus sur le bouton radio qu'il commande, non sur
+     le libelle. Relacher le focus d'un bouton radio ne le decoche pas. */
+  var A_RELACHER = 'a[target="_blank"], .menu-etat, .theme__b';
+
+  document.addEventListener('click', function (e) {
+    if (!e.detail) return;
+    var actif = document.activeElement;
+    if (actif && actif.matches && actif.matches(A_RELACHER) && actif.blur) actif.blur();
+  });
+
   /* ---- 6. Message de première visite ------------------------------------
      Affiché une seule fois, puis jamais plus : la marque est posée dans
      localStorage sous ehg.accueil. Le dialogue est construit ici plutôt
