@@ -214,12 +214,12 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
    L'element dialog fournit l'arriere-plan assombri et le piege de focus. */
 .accueil{max-width:min(420px,calc(100vw - 32px));margin:auto;padding:22px 20px;
   border:1px solid var(--line);border-radius:14px;
-  background:var(--surface);color:var(--ink);
+  background:var(--surface);color:var(--ink);text-align:center;
   box-shadow:0 18px 48px rgba(9,14,24,.30)}
 .accueil::backdrop{background:rgba(9,14,24,.55)}
 .accueil__titre{margin:0 0 12px;text-align:center;
   font-size:17px;font-weight:700;line-height:1.25;color:var(--bleu)}
-.accueil__texte{margin:0 0 12px;font-size:14px;line-height:1.5;text-wrap:pretty}
+.accueil__texte{margin:0 0 12px;font-size:14px;line-height:1.5;text-wrap:balance}
 .accueil__voeux{margin:0 0 18px;font-size:14px;line-height:1.5;font-weight:600}
 .accueil__action{display:block;width:100%;min-height:44px;
   border:0;border-radius:var(--radius);cursor:pointer;
