@@ -125,10 +125,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   font-size:var(--fs-lien);font-weight:var(--fw-lien);line-height:1.15}
 .menu__lien:hover{border-color:var(--bleu);color:var(--bleu)}
 .menu__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:-3px}
-.menu__fermer{grid-column:1 / -1;display:flex;align-items:center;justify-content:center;
-  min-height:36px;border-radius:8px;cursor:pointer;
-  color:var(--muted);font-size:12px;font-weight:600}
-.menu__fermer:hover{color:var(--ink);background:rgba(255,255,255,.6)}
 
 #etat-orientation:checked ~ #liste-orientation{display:grid}
 #etat-orientation:checked ~ .menu-bouton[for="etat-orientation"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
