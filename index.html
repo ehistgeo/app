@@ -45,6 +45,15 @@
 
         <h2 class="group">Vos ressources</h2>
         <nav class="grid grid--liens" aria-label="Vos ressources">
+            <!-- État des menus dépliants. Boutons radio masqués, placés en tête :
+                 c'est ce qui permet au panneau, plus loin dans la grille, de
+                 réagir en CSS pur, sans JavaScript. « aucun » referme tout. -->
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-aucun" checked>
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-orientation">
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-hggsp">
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-informer">
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-regarder">
+
             <a class="tile tile--cadre tile--large" href="https://psn.monlycee.net" target="_blank" rel="noopener noreferrer">ENT</a>
             <!-- http : le certificat https de ce domaine ne correspond pas au nom de domaine -->
             <a class="tile tile--cadre tile--large" href="http://cdg-longperrier.fr" target="_blank" rel="noopener noreferrer">Lycée</a>
@@ -54,57 +63,50 @@
             <a class="tile tile--lien" href="https://edurl.fr/ehistgeo-depot" target="_blank" rel="noopener noreferrer">Casier Pr</a>
 
             <a class="tile tile--lien" href="https://youtube.com/playlist?list=PLZmuf2KsdD-c&amp;si=917XmsMGsE5s0ZmF" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <label class="tile tile--lien menu-bouton" for="etat-orientation">Orientation</label>
+            <label class="tile tile--lien menu-bouton" for="etat-hggsp">Choisir l’HGGSP</label>
 
-            <!-- Tuiles à choix multiple : un appui déplie la liste des destinations.
-                 Élément details natif, donc fonctionnel sans JavaScript. -->
-            <details class="menu" name="ressources">
-                <summary class="tile tile--lien">Orientation</summary>
-                <div class="menu__liste">
-                    <a class="menu__lien" href="https://www.onisep.fr/horizons21" target="_blank" rel="noopener noreferrer">Horizon 2021</a>
-                    <a class="menu__lien" href="https://www.education.gouv.fr/reussir-au-lycee/choisir-ses-enseignements-de-specialite-au-lycee-pour-preparer-ses-etudes-superieures-325475" target="_blank" rel="noopener noreferrer">Bien choisir</a>
-                    <a class="menu__lien" href="https://www.parcoursup.gouv.fr/construire-son-projet-d-orientation/comment-choisir-vos-specialites-en-seconde-et-premiere-1619" target="_blank" rel="noopener noreferrer">Parcoursup</a>
-                </div>
-            </details>
+            <!-- Les panneaux de cette rangée, donc dépliés juste en dessous -->
+            <div class="menu__liste" id="liste-orientation">
+                <a class="menu__lien" href="https://www.onisep.fr/horizons21" target="_blank" rel="noopener noreferrer">Horizon 2021</a>
+                <a class="menu__lien" href="https://www.education.gouv.fr/reussir-au-lycee/choisir-ses-enseignements-de-specialite-au-lycee-pour-preparer-ses-etudes-superieures-325475" target="_blank" rel="noopener noreferrer">Bien choisir</a>
+                <a class="menu__lien" href="https://www.parcoursup.gouv.fr/construire-son-projet-d-orientation/comment-choisir-vos-specialites-en-seconde-et-premiere-1619" target="_blank" rel="noopener noreferrer">Parcoursup</a>
+                <label class="menu__fermer" for="etat-aucun">Fermer</label>
+            </div>
+            <div class="menu__liste" id="liste-hggsp">
+                <a class="menu__lien" href="https://www.lumni.fr/article/pourquoi-choisir-la-spe-histoire-geographie-geopolitique-et-sciences-politiques-au-lycee-general" target="_blank" rel="noopener noreferrer">Présentation HGGSP</a>
+                <a class="menu__lien" href="https://www.youtube.com/watch?v=XCviaP-b4ik" target="_blank" rel="noopener noreferrer">Discipline d’avenir</a>
+                <a class="menu__lien" href="https://www.letudiant.fr/lycee/specialites-bac-general/article/presentation-et-programme-de-la-specialite-histoire-geographie-geopolitique-et-sciences-politiques-hggsp-en-classe-de-premiere.html" target="_blank" rel="noopener noreferrer">L’Etudiant</a>
+                <a class="menu__lien" href="https://www.youtube.com/watch?v=vCwTye1HqlA" target="_blank" rel="noopener noreferrer">Témoignage 1</a>
+                <a class="menu__lien" href="https://youtu.be/oZjGyQksJhM?si=QxYA-wXGzOOzzufF" target="_blank" rel="noopener noreferrer">Témoignage 2</a>
+                <label class="menu__fermer" for="etat-aucun">Fermer</label>
+            </div>
 
-            <details class="menu" name="ressources">
-                <summary class="tile tile--lien">Choisir l’HGGSP</summary>
-                <div class="menu__liste">
-                    <a class="menu__lien" href="https://www.lumni.fr/article/pourquoi-choisir-la-spe-histoire-geographie-geopolitique-et-sciences-politiques-au-lycee-general" target="_blank" rel="noopener noreferrer">Présentation HGGSP</a>
-                    <a class="menu__lien" href="https://www.youtube.com/watch?v=XCviaP-b4ik" target="_blank" rel="noopener noreferrer">Discipline d’avenir</a>
-                    <a class="menu__lien" href="https://www.letudiant.fr/lycee/specialites-bac-general/article/presentation-et-programme-de-la-specialite-histoire-geographie-geopolitique-et-sciences-politiques-hggsp-en-classe-de-premiere.html" target="_blank" rel="noopener noreferrer">L’Etudiant</a>
-                    <a class="menu__lien" href="https://www.youtube.com/watch?v=vCwTye1HqlA" target="_blank" rel="noopener noreferrer">Témoignage 1</a>
-                    <a class="menu__lien" href="https://youtu.be/oZjGyQksJhM?si=QxYA-wXGzOOzzufF" target="_blank" rel="noopener noreferrer">Témoignage 2</a>
-                </div>
-            </details>
-
-            <details class="menu" name="ressources">
-                <summary class="tile tile--lien">S’informer</summary>
-                <div class="menu__liste">
-                    <a class="menu__lien" href="https://www.lemonde.fr/" target="_blank" rel="noopener noreferrer">Le Monde</a>
-                    <a class="menu__lien" href="https://www.lefigaro.fr/" target="_blank" rel="noopener noreferrer">Le Figaro</a>
-                    <a class="menu__lien" href="https://www.leparisien.fr/" target="_blank" rel="noopener noreferrer">Le Parisien</a>
-                    <a class="menu__lien" href="https://www.liberation.fr/" target="_blank" rel="noopener noreferrer">Libération</a>
-                    <a class="menu__lien" href="https://www.ouest-france.fr/" target="_blank" rel="noopener noreferrer">Ouest France</a>
-                    <a class="menu__lien" href="https://www.sudouest.fr/" target="_blank" rel="noopener noreferrer">Sud Ouest</a>
-                    <a class="menu__lien" href="https://www.youtube.com/@HugoDecrypteActus" target="_blank" rel="noopener noreferrer">Hugo Décrypte</a>
-                </div>
-            </details>
-
-            <details class="menu" name="ressources">
-                <summary class="tile tile--lien">Regarder</summary>
-                <div class="menu__liste">
-                    <a class="menu__lien" href="https://www.youtube.com/@NotaBeneMovies" target="_blank" rel="noopener noreferrer">Nota Bene</a>
-                    <a class="menu__lien" href="https://www.youtube.com/@arte" target="_blank" rel="noopener noreferrer">Arte</a>
-                    <a class="menu__lien" href="https://www.youtube.com/@lesbonsprofs" target="_blank" rel="noopener noreferrer">Les bons Profs</a>
-                    <a class="menu__lien" href="https://www.youtube.com/@LaFolleHistoire" target="_blank" rel="noopener noreferrer">La folle Histoire</a>
-                    <a class="menu__lien" href="https://www.youtube.com/@ledessousdescartesarte" target="_blank" rel="noopener noreferrer">Le dessous des cartes</a>
-                    <a class="menu__lien" href="https://www.youtube.com/@MisterGeopolitix" target="_blank" rel="noopener noreferrer">Mister Géopolitix</a>
-                    <a class="menu__lien" href="https://www.youtube.com/@HugoDecrypteActus" target="_blank" rel="noopener noreferrer">Hugo Décrypte</a>
-                </div>
-            </details>
-
+            <label class="tile tile--lien menu-bouton" for="etat-informer">S’informer</label>
+            <label class="tile tile--lien menu-bouton" for="etat-regarder">Regarder</label>
             <!-- TODO : destinations à renseigner, la tuile reste inerte en attendant -->
             <span class="tile tile--lien tile--inerte">Écouter</span>
+
+            <div class="menu__liste" id="liste-informer">
+                <a class="menu__lien" href="https://www.lemonde.fr/" target="_blank" rel="noopener noreferrer">Le Monde</a>
+                <a class="menu__lien" href="https://www.lefigaro.fr/" target="_blank" rel="noopener noreferrer">Le Figaro</a>
+                <a class="menu__lien" href="https://www.leparisien.fr/" target="_blank" rel="noopener noreferrer">Le Parisien</a>
+                <a class="menu__lien" href="https://www.liberation.fr/" target="_blank" rel="noopener noreferrer">Libération</a>
+                <a class="menu__lien" href="https://www.ouest-france.fr/" target="_blank" rel="noopener noreferrer">Ouest France</a>
+                <a class="menu__lien" href="https://www.sudouest.fr/" target="_blank" rel="noopener noreferrer">Sud Ouest</a>
+                <a class="menu__lien" href="https://www.youtube.com/@HugoDecrypteActus" target="_blank" rel="noopener noreferrer">Hugo Décrypte</a>
+                <label class="menu__fermer" for="etat-aucun">Fermer</label>
+            </div>
+            <div class="menu__liste" id="liste-regarder">
+                <a class="menu__lien" href="https://www.youtube.com/@NotaBeneMovies" target="_blank" rel="noopener noreferrer">Nota Bene</a>
+                <a class="menu__lien" href="https://www.youtube.com/@arte" target="_blank" rel="noopener noreferrer">Arte</a>
+                <a class="menu__lien" href="https://www.youtube.com/@lesbonsprofs" target="_blank" rel="noopener noreferrer">Les bons Profs</a>
+                <a class="menu__lien" href="https://www.youtube.com/@LaFolleHistoire" target="_blank" rel="noopener noreferrer">La folle Histoire</a>
+                <a class="menu__lien" href="https://www.youtube.com/@ledessousdescartesarte" target="_blank" rel="noopener noreferrer">Le dessous des cartes</a>
+                <a class="menu__lien" href="https://www.youtube.com/@MisterGeopolitix" target="_blank" rel="noopener noreferrer">Mister Géopolitix</a>
+                <a class="menu__lien" href="https://www.youtube.com/@HugoDecrypteActus" target="_blank" rel="noopener noreferrer">Hugo Décrypte</a>
+                <label class="menu__fermer" for="etat-aucun">Fermer</label>
+            </div>
         </nav>
 
         <footer class="mentions">

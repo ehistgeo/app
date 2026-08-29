@@ -72,7 +72,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
    larges de 3 colonnes. Rangée 2, trois tuiles de 2 colonnes. Les bords
    extérieurs des deux rangées restent alignés. */
 .grid--liens{grid-template-columns:repeat(6,1fr)}
-.grid--liens>.tile,.grid--liens>.menu{grid-column:span 2}
+.grid--liens>.tile{grid-column:span 2}
 .grid--liens>.tile--large{grid-column:span 3}
 .tile{display:flex;align-items:center;justify-content:center;text-align:center;
   text-decoration:none;min-height:44px;padding:6px 8px;line-height:1.15;
@@ -102,23 +102,45 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--vide{background:transparent;border-style:dashed;color:var(--muted)}
 .tile:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
-/* Tuiles à choix multiple. Le panneau est une feuille ancrée en bas de l'écran,
-   comme l'invitation à installer : en position fixe, il ne prend aucune place
-   dans la mise en page, donc il ne peut pas provoquer de défilement, il reste
-   entier à l'écran quel que soit le nombre d'entrées, et sa position ne dépend
-   ni de la rangée ni de la colonne de la tuile qui l'ouvre. */
-.menu{display:grid}
-.menu>summary{list-style:none;cursor:pointer}
-.menu>summary::-webkit-details-marker{display:none}
-.menu[open]>summary{border-color:var(--bleu);color:var(--bleu)}
-.menu__liste{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:30;
-  width:100%;max-width:var(--maxw);max-height:calc(100vh - 24px);overflow-y:auto;
-  display:flex;flex-direction:column;
-  padding:6px 6px calc(6px + env(safe-area-inset-bottom));
-  background:var(--surface);border:1px solid var(--line);border-bottom:0;
-  border-radius:var(--radius) var(--radius) 0 0;
-  box-shadow:0 -6px 20px rgba(19,16,24,.16)}
-@supports (height:1svh){.menu__liste{max-height:calc(100svh - 24px)}}
+/* Tuiles à choix multiple. Le panneau se déplie dans la grille elle-même,
+   sur toute la largeur, juste sous la rangée de la tuile ouverte. Deux colonnes,
+   pour diviser par deux la hauteur ajoutée : sept entrées tiennent sur quatre
+   rangées au lieu de sept.
+   L'état est porté par des boutons radio masqués, placés en tête de la grille.
+   Tout tient donc en CSS, sans JavaScript, et un seul panneau peut être ouvert.
+   L'élément details ne convenait pas ici : son contenu est enfermé par le
+   navigateur dans une boîte interne, qui occupe une case de la grille et
+   empêche le panneau de s'étendre sur toute la largeur. */
+.menu-etat{position:absolute}
+.menu-bouton{cursor:pointer}
+.menu__liste{grid-column:1 / -1;display:none;grid-template-columns:1fr 1fr;gap:6px;
+  padding:6px;background:#E3E9F2;border:1px solid var(--line);border-radius:var(--radius)}
+.menu__lien{display:flex;align-items:center;min-height:44px;padding:0 10px;
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  color:var(--ink);text-decoration:none;
+  font-size:var(--fs-lien);font-weight:var(--fw-lien);line-height:1.15}
+.menu__lien:hover{border-color:var(--bleu);color:var(--bleu)}
+.menu__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:-3px}
+.menu__fermer{grid-column:1 / -1;display:flex;align-items:center;justify-content:center;
+  min-height:36px;border-radius:8px;cursor:pointer;
+  color:var(--muted);font-size:12px;font-weight:600}
+.menu__fermer:hover{color:var(--ink);background:rgba(255,255,255,.6)}
+
+#etat-orientation:checked ~ #liste-orientation{display:grid}
+#etat-orientation:checked ~ .menu-bouton[for="etat-orientation"]{border-color:var(--bleu);color:var(--bleu);background:#F4F7FB}
+#etat-orientation:focus-visible ~ .menu-bouton[for="etat-orientation"]{outline:3px solid var(--magenta);outline-offset:2px}
+#etat-hggsp:checked ~ #liste-hggsp{display:grid}
+#etat-hggsp:checked ~ .menu-bouton[for="etat-hggsp"]{border-color:var(--bleu);color:var(--bleu);background:#F4F7FB}
+#etat-hggsp:focus-visible ~ .menu-bouton[for="etat-hggsp"]{outline:3px solid var(--magenta);outline-offset:2px}
+#etat-informer:checked ~ #liste-informer{display:grid}
+#etat-informer:checked ~ .menu-bouton[for="etat-informer"]{border-color:var(--bleu);color:var(--bleu);background:#F4F7FB}
+#etat-informer:focus-visible ~ .menu-bouton[for="etat-informer"]{outline:3px solid var(--magenta);outline-offset:2px}
+#etat-regarder:checked ~ #liste-regarder{display:grid}
+#etat-regarder:checked ~ .menu-bouton[for="etat-regarder"]{border-color:var(--bleu);color:var(--bleu);background:#F4F7FB}
+#etat-regarder:focus-visible ~ .menu-bouton[for="etat-regarder"]{outline:3px solid var(--magenta);outline-offset:2px}
+
+/* Sous 360 px, deux colonnes couperaient les libellés les plus longs */
+@media (max-width:359px){.menu__liste{grid-template-columns:1fr}}
 .menu__lien{display:flex;align-items:center;min-height:44px;padding:0 12px;
   border-radius:8px;color:var(--ink);text-decoration:none;
   font-size:var(--fs-lien);font-weight:var(--fw-lien)}

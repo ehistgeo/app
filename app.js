@@ -142,32 +142,37 @@
     ecrire(CLE_INVITE, 'non');
   });
 
-  /* ---- 4. Fermeture des menus dépliants -------------------------------- */
-  /* Sans script, un menu ouvert se referme en réappuyant sur son libellé.
-     Le script ajoute les deux gestes attendus : appui à l'extérieur et touche
-     Échap. L'exclusivité entre les deux menus est assurée nativement par
-     l'attribut name, ce complément la reproduit sur les navigateurs anciens. */
+  /* ---- 4. Confort des menus dépliants ----------------------------------- */
+  /* Les menus fonctionnent entièrement en CSS. Le script n'ajoute que trois
+     commodités : amener le panneau dans le champ de vision, le refermer d'un
+     appui à l'extérieur, et le refermer avec la touche Échap. */
 
-  var menus = document.querySelectorAll('details.menu');
+  var etats = document.querySelectorAll('.menu-etat');
+  var aucun = document.getElementById('etat-aucun');
 
-  function fermerMenus(sauf) {
-    Array.prototype.forEach.call(menus, function (m) {
-      if (m !== sauf) m.open = false;
-    });
+  function fermerMenus() {
+    if (aucun) aucun.checked = true;
   }
 
-  Array.prototype.forEach.call(menus, function (m) {
-    m.addEventListener('toggle', function () {
-      if (m.open) fermerMenus(m);
+  Array.prototype.forEach.call(etats, function (etat) {
+    if (etat === aucun) return;
+    etat.addEventListener('change', function () {
+      if (!etat.checked) return;
+      var panneau = document.getElementById(etat.id.replace('etat-', 'liste-'));
+      if (!panneau || !panneau.scrollIntoView) return;
+      var doux = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(function () {
+        panneau.scrollIntoView({ block: 'nearest', behavior: doux ? 'smooth' : 'auto' });
+      }, 60);
     });
   });
 
-  if (menus.length) {
+  if (etats.length) {
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('details.menu')) fermerMenus(null);
+      if (!e.target.closest('.menu__liste, .menu-bouton')) fermerMenus();
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') fermerMenus(null);
+      if (e.key === 'Escape') fermerMenus();
     });
   }
 })();
