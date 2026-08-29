@@ -10,17 +10,30 @@
     <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <meta name="theme-color" content="#12335C">
+    <meta name="theme-color" content="#12335C" id="couleur-theme">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="e-histgeo">
+    <script>
+        (function () {
+            var racine = document.documentElement;
+            racine.classList.add('js');
+            var choix = null;
+            try { choix = localStorage.getItem('ehg.theme'); } catch (e) { /* navigation privee */ }
+            if (choix === 'dark' || choix === 'light') racine.setAttribute('data-theme', choix);
+            var sombre = choix === 'dark' ||
+                (choix !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+            var meta = document.getElementById('couleur-theme');
+            if (meta) meta.setAttribute('content', sombre ? '#0B1320' : '#12335C');
+        })();
+    </script>
 </head>
 <body>
     <div class="page page--doc">
 
         <header class="hero">
-            <a class="logo-link" href="./" title="Retour à l’app"><img class="logo" src="logo-160.png" alt="e-histgeo" width="160" height="160"></a>
+            <a class="logo-link" href="./" title="Retour à l’app"><img class="logo logo--clair" src="logo-160.png" alt="e-histgeo" width="160" height="160"><img class="logo logo--sombre" src="logo-160-sombre.png" alt="" aria-hidden="true" width="160" height="160"></a>
         </header>
 
         <main class="doc">
@@ -53,11 +66,12 @@
             <h2>Données personnelles</h2>
             <p><strong>L’app ne collecte aucune donnée personnelle.</strong> Elle ne comporte ni formulaire,
             ni compte, ni mesure d’audience, ni traceur publicitaire, et ne dépose aucun cookie.</p>
-            <p>Deux informations sont conservées sur l’appareil de l’élève, dans le stockage local de son
+            <p>Quatre informations sont conservées sur l’appareil de l’élève, dans le stockage local de son
             navigateur, dans le seul but de lui rendre service : la classe qu’il a ouverte en dernier, afin de
-            la présenter en premier, et la liste des nouveautés qu’il a déjà consultées. Ces informations ne
-            sont jamais transmises, ni à l’éditeur ni à un tiers. Elles disparaissent lorsque l’élève efface
-            les données de son navigateur.</p>
+            la présenter en premier ; la liste des nouveautés qu’il a déjà consultées ; le fait qu’il ait écarté
+            l’invitation à installer l’app ; et le thème d’affichage qu’il a choisi, clair, sombre ou automatique.
+            Ces informations ne sont jamais transmises, ni à l’éditeur ni à un tiers. Elles disparaissent lorsque
+            l’élève efface les données de son navigateur.</p>
             <p>Aucun traitement de données au sens du règlement (UE) 2016/679 n’est donc mis en œuvre par
             l’éditeur, et aucun consentement n’a à être recueilli.</p>
             <p>L’hébergeur, pour sa part, conserve des journaux techniques de connexion comportant notamment

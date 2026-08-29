@@ -4,7 +4,12 @@
 
 :root{
   --bg:#ECEFF4; --surface:#FFFFFF; --ink:#141B24; --muted:#4C5A68;
+  /* --bleu est la couleur de TRAIT : texte, filets, bordures. Le fond plein
+     des tuiles de cours a ses propres jetons, car en mode sombre un fond doit
+     rester sombre alors qu'un trait doit devenir clair. */
   --bleu:#12335C; --bleu-deep:#0C2445; --bleu-ink:#FFFFFF;
+  --accent-fond:#12335C; --accent-fond-vif:#0C2445; --accent-bord:transparent;
+  --survol:#E6ECF4;
   --magenta:#D6157E; --cyan:#6EC9EE;
   --line:#CBD3DD; --group-ink:#4C5A68;
   /* Panneau déplié : teinte assez marquée pour se distinguer du fond,
@@ -92,12 +97,13 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 
 .group{display:flex;align-items:center;gap:12px;justify-content:center}
 .group::before,.group::after{content:"";flex:1;height:1px;background:var(--line)}
-.tile--cours{background:var(--bleu);color:var(--bleu-ink);border-radius:var(--radius);
+.tile--cours{background:var(--accent-fond);color:var(--bleu-ink);border-radius:var(--radius);
+  border:1px solid var(--accent-bord);
   box-shadow:0 1px 0 rgba(19,16,24,.10), inset 0 -3px 0 rgba(0,0,0,.22)}
-.tile--cours:hover{background:var(--bleu-deep)}
+.tile--cours:hover{background:var(--accent-fond-vif)}
 .tile--cours:active{transform:translateY(1px);box-shadow:inset 0 -1px 0 rgba(0,0,0,.22)}
 .tile--cadre{background:var(--surface);color:var(--bleu);border:1.5px solid var(--bleu);border-radius:var(--radius)}
-.tile--cadre:hover{background:#E6ECF4}
+.tile--cadre:hover{background:var(--survol)}
 .tile--cadre:active{transform:translateY(1px)}
 .tile--lien{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius)}
 .tile--lien:hover{border-color:var(--bleu);color:var(--bleu)}
@@ -119,11 +125,11 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .menu__liste{grid-column:1 / -1;display:none;grid-template-columns:1fr 1fr;gap:6px;
   padding:6px;background:var(--panneau);border:1px solid var(--panneau-bord);
   border-left:5px solid var(--bleu);border-radius:var(--radius)}
-.menu__lien{display:flex;align-items:center;min-height:44px;padding:0 10px;
+.menu__lien{display:flex;align-items:center;min-height:44px;padding:0 12px;
   background:var(--surface);border:1px solid var(--line);border-radius:8px;
   color:var(--ink);text-decoration:none;
   font-size:var(--fs-lien);font-weight:var(--fw-lien);line-height:1.15}
-.menu__lien:hover{border-color:var(--bleu);color:var(--bleu)}
+.menu__lien:hover{border-color:var(--bleu);color:var(--bleu);background:var(--survol)}
 .menu__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:-3px}
 
 #etat-orientation:checked ~ #liste-orientation{display:grid}
@@ -141,11 +147,65 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 
 /* Sous 360 px, deux colonnes couperaient les libellés les plus longs */
 @media (max-width:359px){.menu__liste{grid-template-columns:1fr}}
-.menu__lien{display:flex;align-items:center;min-height:44px;padding:0 12px;
-  border-radius:8px;color:var(--ink);text-decoration:none;
-  font-size:var(--fs-lien);font-weight:var(--fw-lien)}
-.menu__lien:hover{background:#E6ECF4;color:var(--bleu)}
-.menu__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:-3px}
+
+/* ------------------------------------------------------------------ */
+/* Mode sombre.
+   Trois etats possibles. Sans attribut data-theme, l'app suit le reglage
+   du systeme. Avec data-theme="dark" ou "light", le choix de l'eleve
+   l'emporte, dans les deux sens. La liste de jetons est donc ecrite deux
+   fois : CSS ne permet pas de reunir une requete media et un selecteur
+   dans une meme regle.
+   Seules les couleurs changent : aucune dimension, aucune graisse. */
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+  --bg:#0B1320; --surface:#1A2739; --ink:#E9EEF6; --muted:#A3B3C7;
+  --bleu:#7FB2E6; --bleu-deep:#A8CCF2; --bleu-ink:#FFFFFF;
+  --accent-fond:#234878; --accent-fond-vif:#2C5891; --accent-bord:#3E6499;
+  --magenta:#FF5FA8; --cyan:#6EC9EE;
+  --line:#2E3F58; --group-ink:#A3B3C7;
+  --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
+  --survol:#22344F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1320; --surface:#1A2739; --ink:#E9EEF6; --muted:#A3B3C7;
+  --bleu:#7FB2E6; --bleu-deep:#A8CCF2; --bleu-ink:#FFFFFF;
+  --accent-fond:#234878; --accent-fond-vif:#2C5891; --accent-bord:#3E6499;
+  --magenta:#FF5FA8; --cyan:#6EC9EE;
+  --line:#2E3F58; --group-ink:#A3B3C7;
+  --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
+  --survol:#22344F;
+}
+
+/* Le logo porte son nom en marine fonce, illisible sur fond sombre :
+   une seconde image, au nom en clair, le remplace. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .logo--clair{display:none}
+  :root:not([data-theme="light"]) .logo--sombre{display:block}
+}
+:root[data-theme="dark"] .logo--clair{display:none}
+:root[data-theme="dark"] .logo--sombre{display:block}
+.logo--sombre{display:none}
+
+/* ------------------------------------------------------------------ */
+/* Selecteur de theme, dans le pied de page.
+   Il n'apparait que si le script s'est execute : sans lui, les boutons
+   seraient inertes et l'app suit simplement le reglage du systeme. */
+.mentions .theme{display:none}
+:root.js .mentions .theme{display:inline-flex}
+.theme__groupe{gap:2px}
+/* min-height a 24 px : cible tactile minimale de WCAG 2.2, critere 2.5.8 */
+.theme__b{appearance:none;border:0;background:none;cursor:pointer;
+  display:inline-flex;align-items:center;min-height:24px;padding:0 8px;border-radius:6px;
+  font-family:inherit;font-size:var(--fs-mentions);line-height:1;
+  color:var(--muted)}
+.theme__b:hover{color:var(--ink)}
+.theme__b:focus-visible{outline:3px solid var(--magenta);outline-offset:1px}
+:root:not([data-theme]) .theme__b[data-theme-choix="auto"],
+:root[data-theme="light"] .theme__b[data-theme-choix="light"],
+:root[data-theme="dark"] .theme__b[data-theme-choix="dark"]{
+  color:var(--bleu);font-weight:700;background:var(--survol)}
 
 /* Page de texte : mentions légales. Le défilement y est normal, la contrainte
    « tout tient sans défiler » ne concerne que l'écran d'accueil. */
@@ -166,7 +226,11 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 
 /* Lien vers les mentions, sur sa propre ligne sous le pied de page.
    Le remplissage porte la zone d'appui à 24 px, minimum WCAG 2.2 AA. */
-.mentions p{margin:0;display:flex;align-items:center;justify-content:center;gap:6px}
+/* Le selecteur de theme partage la ligne des mentions : sur un ecran large
+   il ne coute aucune hauteur. Sous 414 px environ la ligne se replie, d'ou
+   row-gap:0, pour que le repli ne coute que la hauteur du bouton. */
+.mentions p{margin:0;display:flex;align-items:center;justify-content:center;
+  column-gap:6px;row-gap:0;flex-wrap:wrap}
 .mentions__lien{display:inline-block;padding:5px 0;color:var(--muted);text-underline-offset:2px}
 .mentions__puce{display:inline-block;line-height:1}
 .mentions__lien:hover{color:var(--ink)}

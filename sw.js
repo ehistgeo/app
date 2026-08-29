@@ -3,7 +3,7 @@
 // L'app s'ouvre donc instantanément et hors ligne, et se met à jour à la visite suivante.
 // Incrémenter CACHE à chaque changement de la liste ASSETS.
 
-const CACHE = 'ehistgeo-v17';
+const CACHE = 'ehistgeo-v18';
 
 /* Seuls les fichiers dont la page a besoin pour s'afficher. Les icônes du
    manifeste ne sont pas préchargées : le navigateur ne les demande qu'au moment
@@ -17,6 +17,7 @@ const ASSETS = [
   './app.js',
   './manifest.json',
   './logo-160.png',
+  './logo-160-sombre.png',
   './favicon-32.png'
 ];
 

@@ -12,6 +12,7 @@
   var CLE_CLASSE = 'ehg.classe';
   var CLE_VUS = 'ehg.vus';
   var CLE_INVITE = 'ehg.invite';
+  var CLE_THEME = 'ehg.theme';
 
   function lire(cle) {
     try { return localStorage.getItem(cle); } catch (e) { return null; }
@@ -141,6 +142,50 @@
   window.addEventListener('appinstalled', function () {
     ecrire(CLE_INVITE, 'non');
   });
+
+  /* ---- 5. Choix du thème -------------------------------------------------
+     Trois états : auto, clair, sombre. Le script en ligne du <head> a déjà
+     posé data-theme avant le premier affichage ; il ne reste ici qu'à
+     réagir aux clics, à retenir le choix, et à tenir à jour la couleur de
+     la barre système ainsi que l'état annoncé aux lecteurs d'écran. */
+
+  var boutonsTheme = document.querySelectorAll('.theme__b');
+  var metaCouleur = document.getElementById('couleur-theme');
+
+  function themeCourant() {
+    return document.documentElement.getAttribute('data-theme') || 'auto';
+  }
+
+  function appliquerTheme(choix) {
+    var racine = document.documentElement;
+    if (choix === 'auto') racine.removeAttribute('data-theme');
+    else racine.setAttribute('data-theme', choix);
+
+    var sombre = choix === 'dark' ||
+      (choix === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (metaCouleur) metaCouleur.setAttribute('content', sombre ? '#0B1320' : '#12335C');
+
+    Array.prototype.forEach.call(boutonsTheme, function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-theme-choix') === choix ? 'true' : 'false');
+    });
+  }
+
+  Array.prototype.forEach.call(boutonsTheme, function (bouton) {
+    bouton.addEventListener('click', function () {
+      var choix = bouton.getAttribute('data-theme-choix');
+      ecrire(CLE_THEME, choix);
+      appliquerTheme(choix);
+    });
+  });
+
+  if (boutonsTheme.length) {
+    appliquerTheme(themeCourant());
+    /* En mode auto, suivre le système s'il change en cours de session. */
+    var sonde = window.matchMedia('(prefers-color-scheme: dark)');
+    var suivre = function () { if (themeCourant() === 'auto') appliquerTheme('auto'); };
+    if (sonde.addEventListener) sonde.addEventListener('change', suivre);
+    else if (sonde.addListener) sonde.addListener(suivre);
+  }
 
   /* ---- 4. Confort des menus dépliants ----------------------------------- */
   /* Les menus fonctionnent entièrement en CSS. Le script n'ajoute que trois
