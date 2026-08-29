@@ -13,11 +13,11 @@
      Un doublon de déclaration ne suffirait pas : une variable personnalisée
      accepte n'importe quelle valeur à la déclaration, l'unité inconnue ne se
      révèle invalide qu'à l'usage, et la propriété est alors abandonnée. */
-  --maxw:600px; --pad-x:18px; --pad-y:clamp(12px,2.4vh,22px);
-  --gap-block:clamp(10px,1.65vh,16px); --gap-hero:8px; --gap-tile:10px;
+  --maxw:600px; --pad-x:18px; --pad-y:clamp(11px,2vh,20px);
+  --gap-block:clamp(9px,1.5vh,15px); --gap-hero:6px; --gap-tile:10px;
   /* Respiration supplémentaire au-dessus des deux titres de groupe,
      identique pour « Vos cours » et « Vos ressources ». */
-  --space-group:clamp(10px,3.2vh,26px);
+  --space-group:clamp(9px,2.6vh,22px);
   --logo:clamp(58px,9vh,76px);
   --fs-welcome:15px; --fw-welcome:700;
   /* La deuxième ligne d'accueil se replie librement : avec 83 caractères, la
@@ -25,7 +25,7 @@
   --fs-welcome-sub:13px;
   --fs-group:12px; --fw-group:600; --ls-group:.09em; --tt-group:uppercase;
   --h-cours:clamp(62px,10vh,84px); --fs-cours:clamp(17px,4.4vw,21px); --fw-cours:600; --ls-cours:.005em;
-  --h-ent:clamp(50px,7.6vh,64px); --fs-ent:17px; --fw-ent:600; --ls-ent:.02em;
+  --h-ent:clamp(47px,7.1vh,62px); --fs-ent:17px; --fw-ent:600; --ls-ent:.02em;
   --h-lien:clamp(46px,6.6vh,58px); --fs-lien:13px; --fw-lien:500;
   --fs-mentions:11px; --radius:10px;
 }
@@ -34,12 +34,12 @@
    Chrome 108, Safari 15.4 et Firefox 101 ou ultérieurs. */
 @supports (height:1svh){
   :root{
-    --pad-y:clamp(12px,2.4svh,22px);
-    --gap-block:clamp(10px,1.65svh,16px);
-    --space-group:clamp(10px,3.2svh,26px);
+    --pad-y:clamp(11px,2svh,20px);
+    --gap-block:clamp(9px,1.5svh,15px);
+    --space-group:clamp(9px,2.6svh,22px);
     --logo:clamp(58px,9svh,76px);
     --h-cours:clamp(62px,10svh,84px);
-    --h-ent:clamp(50px,7.6svh,64px);
+    --h-ent:clamp(47px,7.1svh,62px);
     --h-lien:clamp(46px,6.6svh,58px);
   }
 }
@@ -71,7 +71,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Ressources : 6 colonnes servant de trame commune. Rangée 1, deux tuiles
    larges de 3 colonnes. Rangée 2, trois tuiles de 2 colonnes. Les bords
    extérieurs des deux rangées restent alignés. */
-.grid--liens{grid-template-columns:repeat(6,1fr);position:relative}
+.grid--liens{grid-template-columns:repeat(6,1fr)}
 .grid--liens>.tile,.grid--liens>.menu{grid-column:span 2}
 .grid--liens>.tile--large{grid-column:span 3}
 .tile{display:flex;align-items:center;justify-content:center;text-align:center;
@@ -102,18 +102,23 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--vide{background:transparent;border-style:dashed;color:var(--muted)}
 .tile:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
-/* Tuiles à choix multiple. Le panneau est en position absolue par rapport à
-   la grille : il ne prend aucune place dans la mise en page, donc il ne peut
-   pas provoquer de défilement, et il s'ouvre vers le haut, au-dessus des
-   tuiles, pour rester dans l'écran. */
+/* Tuiles à choix multiple. Le panneau est une feuille ancrée en bas de l'écran,
+   comme l'invitation à installer : en position fixe, il ne prend aucune place
+   dans la mise en page, donc il ne peut pas provoquer de défilement, il reste
+   entier à l'écran quel que soit le nombre d'entrées, et sa position ne dépend
+   ni de la rangée ni de la colonne de la tuile qui l'ouvre. */
 .menu{display:grid}
 .menu>summary{list-style:none;cursor:pointer}
 .menu>summary::-webkit-details-marker{display:none}
 .menu[open]>summary{border-color:var(--bleu);color:var(--bleu)}
-.menu__liste{position:absolute;left:0;right:0;bottom:calc(var(--h-lien) + 6px);z-index:20;
-  display:flex;flex-direction:column;padding:6px;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  box-shadow:0 6px 20px rgba(19,16,24,.16)}
+.menu__liste{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:30;
+  width:100%;max-width:var(--maxw);max-height:calc(100vh - 24px);overflow-y:auto;
+  display:flex;flex-direction:column;
+  padding:6px 6px calc(6px + env(safe-area-inset-bottom));
+  background:var(--surface);border:1px solid var(--line);border-bottom:0;
+  border-radius:var(--radius) var(--radius) 0 0;
+  box-shadow:0 -6px 20px rgba(19,16,24,.16)}
+@supports (height:1svh){.menu__liste{max-height:calc(100svh - 24px)}}
 .menu__lien{display:flex;align-items:center;min-height:44px;padding:0 12px;
   border-radius:8px;color:var(--ink);text-decoration:none;
   font-size:var(--fs-lien);font-weight:var(--fw-lien)}
@@ -181,17 +186,17 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Écrans un peu justes, autour de 640 px de haut : la deuxième ligne d'accueil
    y occupe deux lignes, on récupère la hauteur sur les écarts et le logo. */
 @media (max-height:660px){:root{
-  --gap-block:10px; --space-group:16px; --logo:53px;}}
+  --gap-block:8px; --space-group:12px; --logo:48px; --h-cours:58px; --h-ent:48px;}}
 
 /* Écrans courts : valeurs fixes, l'indexation sur la hauteur n'a plus de sens */
 @media (max-height:620px){:root{
-  --pad-y:8px; --gap-block:6px; --gap-hero:4px; --space-group:6px;
-  --logo:46px; --h-cours:54px; --h-ent:46px; --h-lien:44px;
+  --pad-y:8px; --tile-gap:8px; --gap-block:5px; --gap-hero:4px; --space-group:5px;
+  --logo:42px; --h-cours:50px; --h-ent:46px; --h-lien:44px;
   --fs-welcome:14px; --fs-welcome-sub:11px; --fs-mentions:10px;}}
 
 /* Très courts, typiquement une fenêtre écrasée ou un mode paysage : on resserre
    encore, sans jamais descendre sous les 44 px de cible tactile. */
 @media (max-height:520px){:root{
-  --pad-y:6px; --tile-gap:8px; --gap-block:4px; --gap-hero:3px; --space-group:4px;
-  --logo:37px; --h-cours:48px; --h-ent:44px; --h-lien:44px;
+  --pad-y:6px; --tile-gap:7px; --gap-block:3px; --gap-hero:2px; --space-group:4px;
+  --logo:32px; --h-cours:46px; --h-ent:44px; --h-lien:44px;
   --fs-welcome:13px; --fs-mentions:10px;}}
