@@ -141,4 +141,33 @@
   window.addEventListener('appinstalled', function () {
     ecrire(CLE_INVITE, 'non');
   });
+
+  /* ---- 4. Fermeture des menus dépliants -------------------------------- */
+  /* Sans script, un menu ouvert se referme en réappuyant sur son libellé.
+     Le script ajoute les deux gestes attendus : appui à l'extérieur et touche
+     Échap. L'exclusivité entre les deux menus est assurée nativement par
+     l'attribut name, ce complément la reproduit sur les navigateurs anciens. */
+
+  var menus = document.querySelectorAll('details.menu');
+
+  function fermerMenus(sauf) {
+    Array.prototype.forEach.call(menus, function (m) {
+      if (m !== sauf) m.open = false;
+    });
+  }
+
+  Array.prototype.forEach.call(menus, function (m) {
+    m.addEventListener('toggle', function () {
+      if (m.open) fermerMenus(m);
+    });
+  });
+
+  if (menus.length) {
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('details.menu')) fermerMenus(null);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') fermerMenus(null);
+    });
+  }
 })();

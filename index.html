@@ -37,10 +37,10 @@
              Pour signaler une mise à jour, ajouter data-nouveau="2026-09" sur
              une tuile : une pastille apparaît jusqu'à ce qu'elle soit ouverte. -->
         <nav class="grid grid--cours" aria-label="Vos cours">
-            <a class="tile tile--cours" data-classe="2GT" href="https://edurl.fr/ON2GT" target="_blank" rel="noopener noreferrer">2GT</a>
-            <a class="tile tile--cours" data-classe="1STMG" href="https://edurl.fr/ON1STMG" target="_blank" rel="noopener noreferrer">1STMG</a>
-            <a class="tile tile--cours" data-classe="1SPE HGGSP" href="https://edurl.fr/ON1HGGSP" target="_blank" rel="noopener noreferrer">1SPE HGGSP</a>
-            <a class="tile tile--cours" data-classe="TSPE HGGSP" href="https://edurl.fr/ONTHGGSP" target="_blank" rel="noopener noreferrer">TSPE HGGSP</a>
+            <a class="tile tile--cours" data-classe="2GT6" href="https://edurl.fr/ON2GT" target="_blank" rel="noopener noreferrer">2GT6</a>
+            <a class="tile tile--cours" data-classe="1STMG4" href="https://edurl.fr/ON1STMG" target="_blank" rel="noopener noreferrer">1STMG4</a>
+            <a class="tile tile--cours" data-classe="1SPE HGGSP2" href="https://edurl.fr/ON1HGGSP" target="_blank" rel="noopener noreferrer">1SPE HGGSP2</a>
+            <a class="tile tile--cours" data-classe="TSPE HGGSP2" href="https://edurl.fr/ONTHGGSP" target="_blank" rel="noopener noreferrer">TSPE HGGSP2</a>
         </nav>
 
         <h2 class="group">Vos ressources</h2>
@@ -48,18 +48,39 @@
             <a class="tile tile--cadre tile--large" href="https://psn.monlycee.net" target="_blank" rel="noopener noreferrer">ENT</a>
             <!-- http : le certificat https de ce domaine ne correspond pas au nom de domaine -->
             <a class="tile tile--cadre tile--large" href="http://cdg-longperrier.fr" target="_blank" rel="noopener noreferrer">Lycée</a>
+
             <a class="tile tile--lien" href="https://www.pearltrees.com/private/id104592773?access=47df8840014.63bf585.4e6aac77190f5994214486dadbbf9be3" target="_blank" rel="noopener noreferrer">Pearltrees</a>
-            <a class="tile tile--lien" href="https://reactiv.dane.ac-versailles.fr" target="_blank" rel="noopener noreferrer">Réactiv'</a>
+            <a class="tile tile--lien" href="https://reactiv.dane.ac-versailles.fr" target="_blank" rel="noopener noreferrer">Réactiv’</a>
+            <a class="tile tile--lien" href="https://edurl.fr/ehistgeo-depot" target="_blank" rel="noopener noreferrer">Casier Pr</a>
+
             <a class="tile tile--lien" href="https://youtube.com/playlist?list=PLZmuf2KsdD-c&amp;si=917XmsMGsE5s0ZmF" target="_blank" rel="noopener noreferrer">YouTube</a>
-            <a class="tile tile--lien" href="https://edurl.fr/ehistgeo-depot" target="_blank" rel="noopener noreferrer">Casier</a>
-            <!-- TODO : deux liens à renseigner -->
-            <a class="tile tile--lien" href="https://1drv.ms/f/c/58a90caa39ac0c56/IgD9vZmyfZK7Satx4s8i_yT1AfAbzAuQfoOVMLhH9TM33MA?e=UPaTr8" target="_blank" rel="noopener noreferrer">Méthodes</a>
-            <span class="tile tile--lien tile--inerte tile--vide" aria-hidden="true">?</span>
+
+            <!-- Tuiles à choix multiple : un appui déplie la liste des destinations.
+                 Élément details natif, donc fonctionnel sans JavaScript. -->
+            <details class="menu" name="ressources">
+                <summary class="tile tile--lien">Orientation</summary>
+                <div class="menu__liste">
+                    <a class="menu__lien" href="https://www.onisep.fr/horizons21" target="_blank" rel="noopener noreferrer">Horizon 2021</a>
+                    <a class="menu__lien" href="https://www.education.gouv.fr/reussir-au-lycee/choisir-ses-enseignements-de-specialite-au-lycee-pour-preparer-ses-etudes-superieures-325475" target="_blank" rel="noopener noreferrer">Bien choisir</a>
+                    <a class="menu__lien" href="https://www.parcoursup.gouv.fr/construire-son-projet-d-orientation/comment-choisir-vos-specialites-en-seconde-et-premiere-1619" target="_blank" rel="noopener noreferrer">Parcoursup</a>
+                </div>
+            </details>
+
+            <details class="menu" name="ressources">
+                <summary class="tile tile--lien">Choisir l’HGGSP</summary>
+                <div class="menu__liste">
+                    <a class="menu__lien" href="https://www.lumni.fr/article/pourquoi-choisir-la-spe-histoire-geographie-geopolitique-et-sciences-politiques-au-lycee-general" target="_blank" rel="noopener noreferrer">Présentation HGGSP</a>
+                    <a class="menu__lien" href="https://www.youtube.com/watch?v=XCviaP-b4ik" target="_blank" rel="noopener noreferrer">Discipline d’avenir</a>
+                    <a class="menu__lien" href="https://www.letudiant.fr/lycee/specialites-bac-general/article/presentation-et-programme-de-la-specialite-histoire-geographie-geopolitique-et-sciences-politiques-hggsp-en-classe-de-premiere.html" target="_blank" rel="noopener noreferrer">L’Etudiant</a>
+                    <a class="menu__lien" href="https://www.youtube.com/watch?v=vCwTye1HqlA" target="_blank" rel="noopener noreferrer">Témoignage 1</a>
+                    <a class="menu__lien" href="https://youtu.be/oZjGyQksJhM?si=QxYA-wXGzOOzzufF" target="_blank" rel="noopener noreferrer">Témoignage 2</a>
+                </div>
+            </details>
         </nav>
 
         <footer class="mentions">
             <p>e-histgeo, app pédagogique de M. PLANCHOT-GEFFARD, Professeur agrégé.</p>
-            <p>Tous droits réservés • <a class="mentions__lien" href="mentions.html">Mentions légales</a></p>
+            <p>Tous droits réservés<span class="mentions__puce" aria-hidden="true">•</span><a class="mentions__lien" href="mentions.html">Mentions légales</a></p>
         </footer>
 
     </div>

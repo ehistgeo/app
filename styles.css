@@ -71,8 +71,8 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Ressources : 6 colonnes servant de trame commune. Rangée 1, deux tuiles
    larges de 3 colonnes. Rangée 2, trois tuiles de 2 colonnes. Les bords
    extérieurs des deux rangées restent alignés. */
-.grid--liens{grid-template-columns:repeat(6,1fr)}
-.grid--liens>.tile{grid-column:span 2}
+.grid--liens{grid-template-columns:repeat(6,1fr);position:relative}
+.grid--liens>.tile,.grid--liens>.menu{grid-column:span 2}
 .grid--liens>.tile--large{grid-column:span 3}
 .tile{display:flex;align-items:center;justify-content:center;text-align:center;
   text-decoration:none;min-height:44px;padding:6px 8px;line-height:1.15;
@@ -102,6 +102,24 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--vide{background:transparent;border-style:dashed;color:var(--muted)}
 .tile:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
+/* Tuiles à choix multiple. Le panneau est en position absolue par rapport à
+   la grille : il ne prend aucune place dans la mise en page, donc il ne peut
+   pas provoquer de défilement, et il s'ouvre vers le haut, au-dessus des
+   tuiles, pour rester dans l'écran. */
+.menu{display:grid}
+.menu>summary{list-style:none;cursor:pointer}
+.menu>summary::-webkit-details-marker{display:none}
+.menu[open]>summary{border-color:var(--bleu);color:var(--bleu)}
+.menu__liste{position:absolute;left:0;right:0;bottom:calc(var(--h-lien) + 6px);z-index:20;
+  display:flex;flex-direction:column;padding:6px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:0 6px 20px rgba(19,16,24,.16)}
+.menu__lien{display:flex;align-items:center;min-height:44px;padding:0 12px;
+  border-radius:8px;color:var(--ink);text-decoration:none;
+  font-size:var(--fs-lien);font-weight:var(--fw-lien)}
+.menu__lien:hover{background:#E6ECF4;color:var(--bleu)}
+.menu__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:-3px}
+
 /* Page de texte : mentions légales. Le défilement y est normal, la contrainte
    « tout tient sans défiler » ne concerne que l'écran d'accueil. */
 .page--doc{min-height:auto;gap:0}
@@ -122,7 +140,8 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Lien vers les mentions, sur sa propre ligne sous le pied de page.
    Le remplissage porte la zone d'appui à 24 px, minimum WCAG 2.2 AA. */
 .mentions p{margin:0;display:flex;align-items:center;justify-content:center;gap:6px}
-.mentions__lien{display:inline-block;padding:5px 6px;color:var(--muted);text-underline-offset:2px;vertical-align:middle}
+.mentions__lien{display:inline-block;padding:5px 0;color:var(--muted);text-underline-offset:2px}
+.mentions__puce{display:inline-block;line-height:1}
 .mentions__lien:hover{color:var(--ink)}
 .mentions__lien:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
 
