@@ -61,14 +61,14 @@
 
         <h2 class="group">Vos outils et ressources</h2>
         <nav class="grid grid--liens" aria-label="Vos outils et ressources">
-            <!-- État des menus dépliants. Boutons radio masqués, placés en tête :
-                 c'est ce qui permet au panneau, plus loin dans la grille, de
-                 réagir en CSS pur, sans JavaScript. « aucun » referme tout. -->
-            <input class="menu-etat sr" type="radio" name="ressources" id="etat-aucun" checked>
-            <input class="menu-etat sr" type="radio" name="ressources" id="etat-orientation">
-            <input class="menu-etat sr" type="radio" name="ressources" id="etat-hggsp">
-            <input class="menu-etat sr" type="radio" name="ressources" id="etat-informer">
-            <input class="menu-etat sr" type="radio" name="ressources" id="etat-regarder">
+            <!-- L'état des menus dépliants est porté par quatre boutons radio
+                 masqués, chacun déclaré juste avant le libellé qu'il commande.
+                 C'est ce qui permet au panneau, plus loin dans la grille, de
+                 réagir en CSS pur, sans JavaScript, et c'est ce qui fait que
+                 l'ordre de tabulation suit l'ordre visuel des tuiles.
+                 Ils forment un groupe : la tabulation entre dans le groupe, les
+                 flèches passent d'un menu à l'autre. Refermer se fait en les
+                 décochant tous, ce dont le script se charge. -->
 
             <a class="tile tile--cadre tile--large" href="https://psn.monlycee.net" target="_blank" rel="noopener noreferrer">ENT</a>
             <!-- http : le certificat https de ce domaine ne correspond pas au nom de domaine -->
@@ -79,7 +79,9 @@
             <a class="tile tile--lien" href="https://edurl.fr/ehistgeo-depot" target="_blank" rel="noopener noreferrer">Casier Pr</a>
 
             <a class="tile tile--lien" href="https://youtube.com/playlist?list=PLZmuf2KsdD-c&amp;si=917XmsMGsE5s0ZmF" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-orientation" tabindex="0">
             <label class="tile tile--lien menu-bouton" for="etat-orientation">Orientation</label>
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-hggsp" tabindex="0">
             <label class="tile tile--lien menu-bouton" for="etat-hggsp">Choisir l’HGGSP</label>
 
             <!-- Les panneaux de cette rangée, donc dépliés juste en dessous -->
@@ -96,7 +98,9 @@
                 <a class="menu__lien" href="https://youtu.be/oZjGyQksJhM?si=QxYA-wXGzOOzzufF" target="_blank" rel="noopener noreferrer">Témoignage 2</a>
             </div>
 
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-informer" tabindex="0">
             <label class="tile tile--lien menu-bouton" for="etat-informer">S’informer</label>
+            <input class="menu-etat sr" type="radio" name="ressources" id="etat-regarder" tabindex="0">
             <label class="tile tile--lien menu-bouton" for="etat-regarder">Regarder</label>
             <!-- TODO : destinations à renseigner, la tuile reste inerte en attendant -->
             <span class="tile tile--lien tile--inerte">Écouter</span>

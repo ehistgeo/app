@@ -297,14 +297,16 @@
      appui à l'extérieur, et le refermer avec la touche Échap. */
 
   var etats = document.querySelectorAll('.menu-etat');
-  var aucun = document.getElementById('etat-aucun');
 
+  /* Refermer, c'est decocher les quatre boutons radio. Un cinquieme bouton
+     portant l'etat ferme serait plus simple, mais il resterait dans le cycle
+     des fleches sans libelle ni anneau : l'eleve tomberait sur un arret
+     invisible. */
   function fermerMenus() {
-    if (aucun) aucun.checked = true;
+    Array.prototype.forEach.call(etats, function (etat) { etat.checked = false; });
   }
 
   Array.prototype.forEach.call(etats, function (etat) {
-    if (etat === aucun) return;
     etat.addEventListener('change', function () {
       if (!etat.checked) return;
       var panneau = document.getElementById(etat.id.replace('etat-', 'liste-'));
