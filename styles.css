@@ -63,6 +63,9 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   padding:var(--pad-y) var(--pad-x) calc(var(--pad-y) + env(safe-area-inset-bottom));
   -webkit-font-smoothing:antialiased}
 .page{width:100%;max-width:var(--maxw);display:flex;flex-direction:column;gap:var(--gap-block)}
+/* Le reperage du contenu principal ne doit rien changer a la mise en page :
+   ses enfants restent des elements directs de la colonne. */
+.contenu{display:contents}
 .hero{display:flex;flex-direction:column;align-items:center;gap:var(--gap-hero)}
 /* Le logo est un lien vers la page elle-même : un appui la recharge.
    Le ::after élargit la zone d'appui à 44 px sans occuper de place dans la

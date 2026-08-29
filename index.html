@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="theme-color" content="#12335C" id="couleur-theme">
     <meta name="mobile-web-app-capable" content="yes">
@@ -44,10 +43,14 @@
 
         <header class="hero">
             <a class="logo-link" href="./" title="Recharger la page"><img class="logo logo--clair" src="logo-160.png" alt="e-histgeo" width="160" height="160"><img class="logo logo--sombre" src="logo-160-sombre.png" alt="" aria-hidden="true" width="160" height="160"></a>
-            <p class="welcome">Bienvenue sur l'app e-histgeo</p>
+            <h1 class="welcome">Bienvenue sur l'app e-histgeo</h1>
             <p class="welcome welcome--sub">Une application pour suivre le cours et réussir en HG, HGGSP et EMC</p>
         </header>
 
+        <!-- Le contenu principal, repere pour les lecteurs d'ecran. display:contents
+             le laisse transparent a la mise en page : ses enfants restent des
+             elements directs de la colonne. -->
+        <main class="contenu">
         <h2 class="group">Vos cours</h2>
         <!-- data-classe sert à retenir la classe de l'élève sur son appareil.
              Pour signaler une mise à jour, ajouter data-nouveau="2026-09" sur
@@ -103,7 +106,7 @@
             <input class="menu-etat sr" type="radio" name="ressources" id="etat-regarder" tabindex="0">
             <label class="tile tile--lien menu-bouton" for="etat-regarder">Regarder</label>
             <!-- TODO : destinations à renseigner, la tuile reste inerte en attendant -->
-            <span class="tile tile--lien tile--inerte">Écouter</span>
+            <span class="tile tile--lien tile--inerte tile--vide">Écouter</span>
 
             <div class="menu__liste" id="liste-informer">
                 <a class="menu__lien" href="https://www.lemonde.fr/" target="_blank" rel="noopener noreferrer">Le Monde</a>
@@ -124,6 +127,8 @@
                 <a class="menu__lien" href="https://www.youtube.com/@HugoDecrypteActus" target="_blank" rel="noopener noreferrer">Hugo Décrypte</a>
             </div>
         </nav>
+
+        </main>
 
         <footer class="mentions">
             <p>e-histgeo, app pédagogique de M. PLANCHOT-GEFFARD, Professeur agrégé.</p>
