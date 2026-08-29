@@ -211,10 +211,15 @@
     boite.addEventListener('cancel', function (e) { e.preventDefault(); refermer(); });
     boite.addEventListener('click', function (e) { if (e.target === boite) refermer(); });
 
+    /* Le focus va sur le dialogue lui-meme, pas sur le bouton : sinon
+       l'anneau de focus s'affiche des l'ouverture, alors que l'eleve n'a
+       rien fait au clavier. Il reapparait normalement des la premiere
+       tabulation. */
+    boite.setAttribute('tabindex', '-1');
     document.body.appendChild(boite);
     accueilOuvert = true;
     boite.showModal();
-    bouton.focus();
+    boite.focus();
   }
 
   messageAccueil();

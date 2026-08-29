@@ -217,6 +217,9 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   background:var(--surface);color:var(--ink);text-align:center;
   box-shadow:0 18px 48px rgba(9,14,24,.30)}
 .accueil::backdrop{background:rgba(9,14,24,.55)}
+/* Le dialogue recoit le focus a l'ouverture : c'est un conteneur, pas une
+   commande, il n'a donc pas a porter d'anneau. */
+.accueil:focus{outline:none}
 .accueil__titre{margin:0 0 12px;text-align:center;
   font-size:17px;font-weight:700;line-height:1.25;color:var(--bleu)}
 .accueil__texte{margin:0 0 12px;font-size:14px;line-height:1.5;text-wrap:balance}
