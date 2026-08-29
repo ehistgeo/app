@@ -13,6 +13,7 @@
   var CLE_VUS = 'ehg.vus';
   var CLE_INVITE = 'ehg.invite';
   var CLE_THEME = 'ehg.theme';
+  var CLE_ACCUEIL = 'ehg.accueil';
 
   function lire(cle) {
     try { return localStorage.getItem(cle); } catch (e) { return null; }
@@ -78,6 +79,11 @@
 
   /* ---- 2. Invitation à installer ---------------------------------------- */
 
+  /* Connu dès le départ, car beforeinstallprompt peut survenir avant que le
+     message d'accueil ne soit construit. */
+  var accueilOuvert = !lire(CLE_ACCUEIL) && typeof window.HTMLDialogElement === 'function';
+  var invitationEnAttente = null;
+
   var deja = window.matchMedia('(display-mode: standalone)').matches ||
              window.navigator.standalone === true;
   var refusee = lire(CLE_INVITE) === 'non';
@@ -86,6 +92,9 @@
 
   function afficherInvitation(mode) {
     if (invitationAffichee || deja || refusee) return;
+    /* Le message de première visite occupe déjà l'écran : on attend qu'il soit
+       refermé plutôt que d'empiler deux sollicitations. */
+    if (accueilOuvert) { invitationEnAttente = mode; return; }
     if (!document.body) return;
     invitationAffichee = true;
 
@@ -142,6 +151,73 @@
   window.addEventListener('appinstalled', function () {
     ecrire(CLE_INVITE, 'non');
   });
+
+  /* ---- 6. Message de première visite ------------------------------------
+     Affiché une seule fois, puis jamais plus : la marque est posée dans
+     localStorage sous ehg.accueil. Le dialogue est construit ici plutôt
+     qu'écrit dans le HTML, pour qu'il n'existe pas du tout si le script ne
+     s'exécute pas, et pour ne rien coûter en hauteur de page.
+     L'élément dialog apporte gratuitement le piège de focus, la fermeture
+     par Échap et l'arrière-plan assombri. */
+
+  function messageAccueil() {
+    if (!accueilOuvert) return;
+    if (!document.body) { accueilOuvert = false; return; }
+
+    var boite = document.createElement('dialog');
+    boite.className = 'accueil';
+    boite.setAttribute('aria-labelledby', 'accueil-titre');
+
+    var titre = document.createElement('h2');
+    titre.className = 'accueil__titre';
+    titre.id = 'accueil-titre';
+    titre.textContent = 'Bienvenue sur l’app e-histgeo';
+    boite.appendChild(titre);
+
+    var texte = document.createElement('p');
+    texte.className = 'accueil__texte';
+    texte.textContent = 'Cette application, conçue par votre Professeur, est ' +
+      'exclusivement réservée aux élèves de M. PLANCHOT-GEFFARD. Il vous est ' +
+      'fortement conseillé de la mettre en favoris sur votre ordinateur et de ' +
+      'l’épingler sur votre smartphone.';
+    boite.appendChild(texte);
+
+    var voeux = document.createElement('p');
+    voeux.className = 'accueil__voeux';
+    voeux.textContent = 'Excellente rentrée à vous.';
+    boite.appendChild(voeux);
+
+    var bouton = document.createElement('button');
+    bouton.type = 'button';
+    bouton.className = 'accueil__action';
+    bouton.textContent = 'Commencer';
+    boite.appendChild(bouton);
+
+    function refermer() {
+      ecrire(CLE_ACCUEIL, '1');
+      accueilOuvert = false;
+      if (boite.open) boite.close();
+      boite.remove();
+      if (invitationEnAttente) {
+        var mode = invitationEnAttente;
+        invitationEnAttente = null;
+        afficherInvitation(mode);
+      }
+    }
+
+    bouton.addEventListener('click', refermer);
+    /* Échap et le clic sur l'arrière-plan ferment aussi, comme partout ailleurs
+       dans l'app. La marque est posée dans les deux cas : le message a été lu. */
+    boite.addEventListener('cancel', function (e) { e.preventDefault(); refermer(); });
+    boite.addEventListener('click', function (e) { if (e.target === boite) refermer(); });
+
+    document.body.appendChild(boite);
+    accueilOuvert = true;
+    boite.showModal();
+    bouton.focus();
+  }
+
+  messageAccueil();
 
   /* ---- 5. Choix du thème -------------------------------------------------
      Trois états : auto, clair, sombre. Le script en ligne du <head> a déjà

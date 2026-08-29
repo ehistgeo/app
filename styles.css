@@ -24,7 +24,7 @@
   --maxw:600px; --pad-x:18px; --pad-y:clamp(11px,2vh,20px);
   --gap-block:clamp(9px,1.5vh,15px); --gap-hero:6px; --gap-tile:10px;
   /* Respiration supplémentaire au-dessus des deux titres de groupe,
-     identique pour « Vos cours » et « Vos ressources ». */
+     identique pour « Vos cours » et « Vos outils et ressources ». */
   --space-group:clamp(9px,2.6vh,22px);
   --logo:clamp(58px,9vh,76px);
   --fs-welcome:15px; --fw-welcome:700;
@@ -206,6 +206,29 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 :root[data-theme="light"] .theme__b[data-theme-choix="light"],
 :root[data-theme="dark"] .theme__b[data-theme-choix="dark"]{
   color:var(--bleu);font-weight:700;background:var(--survol)}
+
+/* ------------------------------------------------------------------ */
+/* Message de premiere visite.
+   Construit par le script, jamais present dans le HTML : il ne coute donc
+   aucune hauteur de page et n'existe pas si le script ne s'execute pas.
+   L'element dialog fournit l'arriere-plan assombri et le piege de focus. */
+.accueil{max-width:min(420px,calc(100vw - 32px));margin:auto;padding:22px 20px;
+  border:1px solid var(--line);border-radius:14px;
+  background:var(--surface);color:var(--ink);
+  box-shadow:0 18px 48px rgba(9,14,24,.30)}
+.accueil::backdrop{background:rgba(9,14,24,.55)}
+.accueil__titre{margin:0 0 12px;text-align:center;
+  font-size:17px;font-weight:700;line-height:1.25;color:var(--bleu)}
+.accueil__texte{margin:0 0 12px;font-size:14px;line-height:1.5;text-wrap:pretty}
+.accueil__voeux{margin:0 0 18px;font-size:14px;line-height:1.5;font-weight:600}
+.accueil__action{display:block;width:100%;min-height:44px;
+  border:0;border-radius:var(--radius);cursor:pointer;
+  background:var(--accent-fond);color:var(--bleu-ink);
+  font-family:inherit;font-size:15px;font-weight:600}
+.accueil__action:hover{background:var(--accent-fond-vif)}
+.accueil__action:focus-visible{outline:3px solid var(--magenta);outline-offset:2px}
+/* Sur un ecran tres bas, le message defile plutot que de deborder. */
+@media (max-height:420px){.accueil{max-height:calc(100vh - 24px);overflow-y:auto}}
 
 /* Page de texte : mentions légales. Le défilement y est normal, la contrainte
    « tout tient sans défiler » ne concerne que l'écran d'accueil. */
