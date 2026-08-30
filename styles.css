@@ -19,6 +19,11 @@
   /* Panneau déplié : teinte assez marquée pour se distinguer du fond,
      bord gauche au marine de la charte pour le rattacher à sa tuile. */
   --panneau:#D3DEEE; --panneau-bord:#B6C6DC; --panneau-actif:#DCE6F4;
+  /* Degrade des trois rangees de ressources : la teinte s'eclaircit en
+     descendant, de vos outils vers les ressources exterieures. */
+  --rang2:#DCE6F4; --rang2-bord:#B6C6DC;
+  --rang3:#E8EEF7; --rang3-bord:#C3D0E2;
+  --rang4:#F4F7FB; --rang4-bord:#CBD3DD;
   --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --font-title:var(--font);
   /* Les sept valeurs indexées sur la hauteur d'écran sont d'abord exprimées en
      vh, unité universelle, puis redéfinies en svh plus bas sous @supports.
@@ -111,6 +116,9 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--cadre:hover{background:var(--survol)}
 .tile--cadre:active{transform:translateY(1px)}
 .tile--lien{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius)}
+.tile--r2{background:var(--rang2);border-color:var(--rang2-bord)}
+.tile--r3{background:var(--rang3);border-color:var(--rang3-bord)}
+.tile--r4{background:var(--rang4);border-color:var(--rang4-bord)}
 .tile--lien:hover{border-color:var(--bleu);color:var(--bleu)}
 .tile:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
@@ -168,6 +176,9 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --magenta:#FF5FA8; --cyan:#6EC9EE; --focus:#7FB2E6;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
+  --rang2:#22344F; --rang2-bord:#3A5070;
+  --rang3:#1E2D43; --rang3-bord:#33455F;
+  --rang4:#1A2739; --rang4-bord:#2E3F58;
   --survol:#22344F;
   }
 }
@@ -178,6 +189,9 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --magenta:#FF5FA8; --cyan:#6EC9EE; --focus:#7FB2E6;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
+  --rang2:#22344F; --rang2-bord:#3A5070;
+  --rang3:#1E2D43; --rang3-bord:#33455F;
+  --rang4:#1A2739; --rang4-bord:#2E3F58;
   --survol:#22344F;
 }
 
