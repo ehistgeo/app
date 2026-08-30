@@ -148,6 +148,9 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .menu__lien:hover{border-color:var(--bleu);color:var(--bleu);background:var(--survol)}
 .menu__lien:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
 
+#etat-bac:checked ~ #liste-bac{display:grid}
+#etat-bac:checked ~ .menu-bouton[for="etat-bac"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
+#etat-bac:focus-visible ~ .menu-bouton[for="etat-bac"]{outline:3px solid var(--focus);outline-offset:2px}
 #etat-orientation:checked ~ #liste-orientation{display:grid}
 #etat-orientation:checked ~ .menu-bouton[for="etat-orientation"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
 #etat-orientation:focus-visible ~ .menu-bouton[for="etat-orientation"]{outline:3px solid var(--focus);outline-offset:2px}
@@ -168,9 +171,11 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
    d'accessibilite. */
 :root[data-niveau="stmg"] .pour-seconde,
 :root[data-niveau="spe"] .pour-seconde{display:none}
-/* Reserve aux classes a specialite HGGSP, donc masquee par defaut. */
-.pour-spe{display:none}
-:root[data-niveau="spe"] .tile.pour-spe{display:flex}
+/* Reserve aux classes a specialite HGGSP. La regle porte sur l'absence du
+   niveau, et non sur les seules tuiles : sans cela le bouton radio du menu
+   restait masque, donc inatteignable au clavier, alors que son libelle
+   s'affichait. */
+:root:not([data-niveau="spe"]) .pour-spe{display:none}
 
 /* Sous 360 px, deux colonnes couperaient les libellés les plus longs */
 @media (max-width:359px){.menu__liste{grid-template-columns:1fr}}

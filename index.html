@@ -93,9 +93,11 @@
 
             <a class="tile tile--lien tile--r3" href="https://edurl.fr/ehistgeo-depot" target="_blank" rel="noopener noreferrer">Casier</a>
 
-            <!-- Ressources des classes de premiere et terminale a specialite HGGSP.
-                 « Bac HGGSP » viendra ici, avant « Grand oral », des que ses liens
-                 seront connus. -->
+            <!-- Ressources des classes à spécialité HGGSP, première et terminale.
+                 Elles remplacent « Orientation » et « Choisir l'HGGSP », qui ne
+                 concernent que la seconde. -->
+            <input class="menu-etat sr pour-spe" type="radio" name="ressources" id="etat-bac" tabindex="0">
+            <label class="tile tile--lien tile--r3 menu-bouton pour-spe" for="etat-bac">Bac HGGSP</label>
             <a class="tile tile--lien tile--r3 pour-spe" href="https://www.education.gouv.fr/reussir-au-lycee/baccalaureat-comment-se-passe-le-grand-oral-100028" target="_blank" rel="noopener noreferrer">Grand oral</a>
             <input class="menu-etat sr pour-seconde" type="radio" name="ressources" id="etat-orientation" tabindex="0">
             <label class="tile tile--lien tile--r3 menu-bouton pour-seconde" for="etat-orientation">Orientation</label>
@@ -103,6 +105,11 @@
             <label class="tile tile--lien tile--r3 menu-bouton pour-seconde" for="etat-hggsp">Choisir l’HGGSP</label>
 
             <!-- Les panneaux de cette rangée, donc dépliés juste en dessous -->
+            <div class="menu__liste pour-spe" id="liste-bac">
+                <!-- « Épreuves » viendra ici des que son lien sera connu. -->
+                <a class="menu__lien" href="https://www.sujetdebac.fr/annales/specialites/spe-hg-geopolitique-sciences-po/" target="_blank" rel="noopener noreferrer">Annales</a>
+                <a class="menu__lien" href="https://www.lumni.fr/lycee/terminale/hggsp" target="_blank" rel="noopener noreferrer">Lumni</a>
+            </div>
             <div class="menu__liste pour-seconde" id="liste-orientation">
                 <a class="menu__lien" href="https://www.onisep.fr/horizons21" target="_blank" rel="noopener noreferrer">Horizon 21</a>
                 <a class="menu__lien" href="https://www.education.gouv.fr/reussir-au-lycee/choisir-ses-enseignements-de-specialite-au-lycee-pour-preparer-ses-etudes-superieures-325475" target="_blank" rel="noopener noreferrer">Bien choisir</a>
