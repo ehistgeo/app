@@ -161,6 +161,17 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 #etat-regarder:checked ~ .menu-bouton[for="etat-regarder"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
 #etat-regarder:focus-visible ~ .menu-bouton[for="etat-regarder"]{outline:3px solid var(--focus);outline-offset:2px}
 
+/* Ressources reservees a un niveau. Tant qu'aucune classe n'est retenue,
+   tout s'affiche : mieux vaut montrer de trop que de cacher a un eleve ce
+   qui le concerne. Le script retire ensuite du document les elements
+   masques, pour qu'ils ne restent ni dans la tabulation ni dans l'arbre
+   d'accessibilite. */
+:root[data-niveau="stmg"] .pour-seconde,
+:root[data-niveau="spe"] .pour-seconde{display:none}
+/* Reserve aux classes a specialite HGGSP, donc masquee par defaut. */
+.pour-spe{display:none}
+:root[data-niveau="spe"] .tile.pour-spe{display:flex}
+
 /* Sous 360 px, deux colonnes couperaient les libellés les plus longs */
 @media (max-width:359px){.menu__liste{grid-template-columns:1fr}}
 

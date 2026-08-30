@@ -152,6 +152,71 @@
     ecrire(CLE_INVITE, 'non');
   });
 
+  /* ---- 8. Ressources adaptees a la classe --------------------------------
+     Le script en ligne du <head> a deja pose data-niveau, ce qui suffit a
+     masquer les tuiles hors sujet avant le premier affichage. Il reste deux
+     choses a faire ici, que le CSS ne peut pas faire.
+
+     D'abord retirer du document les elements masques : masques, ils
+     resteraient dans le parcours de tabulation et dans l'arbre
+     d'accessibilite, et un eleve au clavier tomberait sur des tuiles
+     invisibles.
+
+     Ensuite reattribuer les teintes du degrade. Elles sont ecrites dans le
+     HTML selon la position d'origine ; une fois deux tuiles retirees, les
+     rangees se recomposent et les teintes ne suivraient plus. */
+
+  var NIVEAUX = { '2GT6': 'seconde', '1STMG4': 'stmg',
+                  '1SPE HGGSP2': 'spe', 'TSPE HGGSP2': 'spe' };
+
+  function reteindreRangees() {
+    var grille = document.querySelector('.grid--liens');
+    if (!grille) return;
+    var petites = grille.querySelectorAll('.tile--lien');
+    Array.prototype.forEach.call(petites, function (tuile, i) {
+      tuile.classList.remove('tile--r2', 'tile--r3', 'tile--r4');
+      tuile.classList.add('tile--r' + Math.min(4, 2 + Math.floor(i / 3)));
+      tuile.style.gridColumn = '';
+    });
+
+    /* Si la derniere rangee est incomplete, ses tuiles sont centrees plutot
+       que calees a gauche, ou elles laisseraient un vide qui se lit comme un
+       oubli. La grille compte six colonnes, une tuile en occupe deux. */
+    var reste = petites.length % 3;
+    if (reste === 1) {
+      petites[petites.length - 1].style.gridColumn = '3 / span 2';
+    } else if (reste === 2) {
+      petites[petites.length - 2].style.gridColumn = '2 / span 2';
+      petites[petites.length - 1].style.gridColumn = '4 / span 2';
+    }
+  }
+
+  function appliquerNiveau(niveau) {
+    var racine = document.documentElement;
+    if (niveau) racine.setAttribute('data-niveau', niveau);
+    else racine.removeAttribute('data-niveau');
+
+    var aRetirer = (niveau === 'stmg' || niveau === 'spe') ? '.pour-seconde' : null;
+    if (aRetirer) {
+      Array.prototype.forEach.call(document.querySelectorAll(aRetirer), function (e) { e.remove(); });
+    }
+    if (niveau !== 'spe') {
+      Array.prototype.forEach.call(document.querySelectorAll('.pour-spe'), function (e) { e.remove(); });
+    }
+    reteindreRangees();
+  }
+
+  appliquerNiveau(NIVEAUX[maClasse] || null);
+
+  /* La classe peut etre choisie alors que l'app est deja ouverte : le lien
+     part dans un autre onglet, celui-ci reste affiche. On ajuste aussitot. */
+  Array.prototype.forEach.call(tuilesCours, function (tuile) {
+    tuile.addEventListener('click', function () {
+      var n = NIVEAUX[tuile.getAttribute('data-classe')];
+      if (n) appliquerNiveau(n);
+    });
+  });
+
   /* ---- 7. Focus retenu apres un clic -------------------------------------
      Un lien garde le focus apres avoir ete clique. Il ne porte alors aucun
      anneau, le navigateur sachant que le pointeur a servi. Mais si l'eleve

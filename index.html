@@ -31,6 +31,16 @@
             var choix = null;
             try { choix = localStorage.getItem('ehg.theme'); } catch (e) { /* navigation privee */ }
             if (choix === 'dark' || choix === 'light') racine.setAttribute('data-theme', choix);
+
+            /* Le niveau de l'eleve, deduit de la classe qu'il a retenue, sert a
+               n'afficher que les ressources qui le concernent. Pose ici, avant
+               le premier affichage, pour qu'aucune tuile n'apparaisse puis ne
+               disparaisse sous ses yeux. */
+            var classe = null;
+            try { classe = localStorage.getItem('ehg.classe'); } catch (e) { /* navigation privee */ }
+            var NIVEAUX = { '2GT6': 'seconde', '1STMG4': 'stmg',
+                            '1SPE HGGSP2': 'spe', 'TSPE HGGSP2': 'spe' };
+            if (classe && NIVEAUX[classe]) racine.setAttribute('data-niveau', NIVEAUX[classe]);
             var sombre = choix === 'dark' ||
                 (choix !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
             var meta = document.getElementById('couleur-theme');
@@ -82,18 +92,23 @@
             <a class="tile tile--lien tile--r2" href="https://duck.ai" target="_blank" rel="noopener noreferrer">IA</a>
 
             <a class="tile tile--lien tile--r3" href="https://edurl.fr/ehistgeo-depot" target="_blank" rel="noopener noreferrer">Casier</a>
-            <input class="menu-etat sr" type="radio" name="ressources" id="etat-orientation" tabindex="0">
-            <label class="tile tile--lien tile--r3 menu-bouton" for="etat-orientation">Orientation</label>
-            <input class="menu-etat sr" type="radio" name="ressources" id="etat-hggsp" tabindex="0">
-            <label class="tile tile--lien tile--r3 menu-bouton" for="etat-hggsp">Choisir l’HGGSP</label>
+
+            <!-- Ressources des classes de premiere et terminale a specialite HGGSP.
+                 « Bac HGGSP » viendra ici, avant « Grand oral », des que ses liens
+                 seront connus. -->
+            <a class="tile tile--lien tile--r3 pour-spe" href="https://www.education.gouv.fr/reussir-au-lycee/baccalaureat-comment-se-passe-le-grand-oral-100028" target="_blank" rel="noopener noreferrer">Grand oral</a>
+            <input class="menu-etat sr pour-seconde" type="radio" name="ressources" id="etat-orientation" tabindex="0">
+            <label class="tile tile--lien tile--r3 menu-bouton pour-seconde" for="etat-orientation">Orientation</label>
+            <input class="menu-etat sr pour-seconde" type="radio" name="ressources" id="etat-hggsp" tabindex="0">
+            <label class="tile tile--lien tile--r3 menu-bouton pour-seconde" for="etat-hggsp">Choisir l’HGGSP</label>
 
             <!-- Les panneaux de cette rangée, donc dépliés juste en dessous -->
-            <div class="menu__liste" id="liste-orientation">
+            <div class="menu__liste pour-seconde" id="liste-orientation">
                 <a class="menu__lien" href="https://www.onisep.fr/horizons21" target="_blank" rel="noopener noreferrer">Horizon 21</a>
                 <a class="menu__lien" href="https://www.education.gouv.fr/reussir-au-lycee/choisir-ses-enseignements-de-specialite-au-lycee-pour-preparer-ses-etudes-superieures-325475" target="_blank" rel="noopener noreferrer">Bien choisir</a>
                 <a class="menu__lien" href="https://www.parcoursup.gouv.fr/construire-son-projet-d-orientation/comment-choisir-vos-specialites-en-seconde-et-premiere-1619" target="_blank" rel="noopener noreferrer">Parcoursup</a>
             </div>
-            <div class="menu__liste" id="liste-hggsp">
+            <div class="menu__liste pour-seconde" id="liste-hggsp">
                 <a class="menu__lien" href="https://www.lumni.fr/article/pourquoi-choisir-la-spe-histoire-geographie-geopolitique-et-sciences-politiques-au-lycee-general" target="_blank" rel="noopener noreferrer">Présentation HGGSP</a>
                 <a class="menu__lien" href="https://www.youtube.com/watch?v=XCviaP-b4ik" target="_blank" rel="noopener noreferrer">Discipline d’avenir</a>
                 <a class="menu__lien" href="https://www.letudiant.fr/lycee/specialites-bac-general/article/presentation-et-programme-de-la-specialite-histoire-geographie-geopolitique-et-sciences-politiques-hggsp-en-classe-de-premiere.html" target="_blank" rel="noopener noreferrer">L’Etudiant</a>
