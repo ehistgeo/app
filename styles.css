@@ -21,6 +21,7 @@
   --panneau:#D3DEEE; --panneau-bord:#B6C6DC; --panneau-actif:#DCE6F4;
   /* Degrade des trois rangees de ressources : la teinte s'eclaircit en
      descendant, de vos outils vers les ressources exterieures. */
+  --rang1:#CBDCF0; --cadre-survol:#BDD1EA; --cadre-ink:#12335C;
   --rang2:#DCE6F4; --rang2-bord:#B6C6DC;
   --rang3:#E8EEF7; --rang3-bord:#C3D0E2;
   --rang4:#F4F7FB; --rang4-bord:#CBD3DD;
@@ -112,8 +113,8 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   box-shadow:0 1px 0 rgba(19,16,24,.10), inset 0 -3px 0 rgba(0,0,0,.22)}
 .tile--cours:hover{background:var(--accent-fond-vif)}
 .tile--cours:active{transform:translateY(1px);box-shadow:inset 0 -1px 0 rgba(0,0,0,.22)}
-.tile--cadre{background:var(--surface);color:var(--bleu);border:1.5px solid var(--bleu);border-radius:var(--radius)}
-.tile--cadre:hover{background:var(--survol)}
+.tile--cadre{background:var(--rang1);color:var(--cadre-ink);border:1.5px solid var(--bleu);border-radius:var(--radius)}
+.tile--cadre:hover{background:var(--cadre-survol)}
 .tile--cadre:active{transform:translateY(1px)}
 .tile--lien{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius)}
 .tile--r2{background:var(--rang2);border-color:var(--rang2-bord)}
@@ -176,6 +177,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --magenta:#FF5FA8; --cyan:#6EC9EE; --focus:#7FB2E6;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
+  --rang1:#2A4162; --cadre-survol:#33507A; --cadre-ink:#A8CCF2;
   --rang2:#22344F; --rang2-bord:#3A5070;
   --rang3:#1E2D43; --rang3-bord:#33455F;
   --rang4:#1A2739; --rang4-bord:#2E3F58;
@@ -189,6 +191,7 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --magenta:#FF5FA8; --cyan:#6EC9EE; --focus:#7FB2E6;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
+  --rang1:#2A4162; --cadre-survol:#33507A; --cadre-ink:#A8CCF2;
   --rang2:#22344F; --rang2-bord:#3A5070;
   --rang3:#1E2D43; --rang3-bord:#33455F;
   --rang4:#1A2739; --rang4-bord:#2E3F58;
