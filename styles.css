@@ -96,8 +96,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 /* Tuiles à contour : ENT et Lycée. Libellés en capitales. */
 .tile--cadre{min-height:var(--h-ent);font-family:var(--font-title);font-size:var(--fs-ent);font-weight:var(--fw-ent);letter-spacing:var(--ls-ent);text-transform:uppercase}
 .tile--lien{min-height:var(--h-lien);font-size:var(--fs-lien);font-weight:var(--fw-lien)}
-/* Emplacements sans lien : inertes, donc aucun survol ne se declenche */
-.tile--inerte{cursor:default;pointer-events:none}
 .mentions{margin-top:auto;padding-top:var(--gap-block);text-align:center;
   font-size:var(--fs-mentions);color:var(--muted);line-height:1.4;text-wrap:pretty}
 @media (prefers-reduced-motion:reduce){.tile{transition:none}}
@@ -114,8 +112,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 .tile--cadre:active{transform:translateY(1px)}
 .tile--lien{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius)}
 .tile--lien:hover{border-color:var(--bleu);color:var(--bleu)}
-/* Emplacements anonymes : contour en pointillés et fond effacé */
-.tile--vide{background:transparent;border-style:dashed;color:var(--muted)}
 .tile:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
 /* Tuiles à choix multiple. Le panneau se déplie dans la grille elle-même,
