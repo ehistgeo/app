@@ -21,10 +21,14 @@
   --panneau:#D3DEEE; --panneau-bord:#B6C6DC; --panneau-actif:#DCE6F4;
   /* Degrade des trois rangees de ressources : la teinte s'eclaircit en
      descendant, de vos outils vers les ressources exterieures. */
-  --rang1:#CBDCF0; --cadre-survol:#BDD1EA; --cadre-ink:#12335C;
-  --rang2:#DCE6F4; --rang2-bord:#B6C6DC;
-  --rang3:#E8EEF7; --rang3-bord:#C3D0E2;
-  --rang4:#F4F7FB; --rang4-bord:#CBD3DD;
+  /* Degrade des quatre rangees de ressources, calcule en clarte percue L*
+     plutot qu'a l'oeil : quatre paliers monotones, aucun ne se confond avec
+     le fond de page, et l'arrivee se fait sur le blanc des tuiles, qui est
+     deja une couleur de la charte. */
+  --rang1:#C4D3E6; --cadre-survol:#B0C1D8; --cadre-ink:#12335C;
+  --rang2:#DBE5F2; --rang2-bord:#B8C5D6;
+  --rang3:#EFF4FA; --rang3-bord:#C4CDD9;
+  --rang4:#FFFFFF; --rang4-bord:#CBD3DD;
   --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --font-title:var(--font);
   /* Les sept valeurs indexées sur la hauteur d'écran sont d'abord exprimées en
      vh, unité universelle, puis redéfinies en svh plus bas sous @supports.
@@ -178,8 +182,8 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
   --rang1:#2A4162; --cadre-survol:#33507A; --cadre-ink:#A8CCF2;
-  --rang2:#22344F; --rang2-bord:#3A5070;
-  --rang3:#1E2D43; --rang3-bord:#33455F;
+  --rang2:#253854; --rang2-bord:#374C6C;
+  --rang3:#202F46; --rang3-bord:#344560;
   --rang4:#1A2739; --rang4-bord:#2E3F58;
   --survol:#22344F;
   }
@@ -192,8 +196,8 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   --line:#2E3F58; --group-ink:#A3B3C7;
   --panneau:#16233A; --panneau-bord:#2E3F58; --panneau-actif:#24385A;
   --rang1:#2A4162; --cadre-survol:#33507A; --cadre-ink:#A8CCF2;
-  --rang2:#22344F; --rang2-bord:#3A5070;
-  --rang3:#1E2D43; --rang3-bord:#33455F;
+  --rang2:#253854; --rang2-bord:#374C6C;
+  --rang3:#202F46; --rang3-bord:#344560;
   --rang4:#1A2739; --rang4-bord:#2E3F58;
   --survol:#22344F;
 }
