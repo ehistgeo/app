@@ -25,7 +25,10 @@
   /* ---- 1. Classe retenue ------------------------------------------------ */
 
   var tuilesCours = document.querySelectorAll('.tile--cours');
-  var maClasse = lire(CLE_CLASSE);
+  /* En apercu, la classe vient de l'adresse et non du stockage : le professeur
+     voit les quatre vues sans que son propre choix soit modifie. */
+  var apercu = window.EHG_APERCU || null;
+  var maClasse = apercu ? (apercu === 'aucune' ? null : apercu) : lire(CLE_CLASSE);
 
   Array.prototype.forEach.call(tuilesCours, function (tuile) {
     var nom = tuile.getAttribute('data-classe');
@@ -41,7 +44,7 @@
     }
 
     tuile.addEventListener('click', function () {
-      ecrire(CLE_CLASSE, nom);
+      if (!apercu) ecrire(CLE_CLASSE, nom);
     });
   });
 
@@ -81,12 +84,12 @@
 
   /* Connu dès le départ, car beforeinstallprompt peut survenir avant que le
      message d'accueil ne soit construit. */
-  var accueilOuvert = !lire(CLE_ACCUEIL) && typeof window.HTMLDialogElement === 'function';
+  var accueilOuvert = !apercu && !lire(CLE_ACCUEIL) && typeof window.HTMLDialogElement === 'function';
   var invitationEnAttente = null;
 
   var deja = window.matchMedia('(display-mode: standalone)').matches ||
              window.navigator.standalone === true;
-  var refusee = lire(CLE_INVITE) === 'non';
+  var refusee = apercu || lire(CLE_INVITE) === 'non';
   var invitationAffichee = false;
   var evenementInstall = null;
 

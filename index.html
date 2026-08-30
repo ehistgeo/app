@@ -28,16 +28,32 @@
         (function () {
             var racine = document.documentElement;
             racine.classList.add('js');
-            var choix = null;
-            try { choix = localStorage.getItem('ehg.theme'); } catch (e) { /* navigation privee */ }
+            var choix = new URLSearchParams(location.search).get('theme');
+            if (choix !== 'dark' && choix !== 'light') {
+              choix = null;
+              try { choix = localStorage.getItem('ehg.theme'); } catch (e) { /* navigation privee */ }
+            }
             if (choix === 'dark' || choix === 'light') racine.setAttribute('data-theme', choix);
 
             /* Le niveau de l'eleve, deduit de la classe qu'il a retenue, sert a
                n'afficher que les ressources qui le concernent. Pose ici, avant
                le premier affichage, pour qu'aucune tuile n'apparaisse puis ne
                disparaisse sous ses yeux. */
-            var classe = null;
-            try { classe = localStorage.getItem('ehg.classe'); } catch (e) { /* navigation privee */ }
+            /* La page d'apercu affiche l'app plusieurs fois dans des cadres qui
+               partagent le meme stockage. Deux parametres d'adresse permettent
+               donc de forcer une classe et un theme le temps d'une visite, sans
+               rien ecrire. Ils sont sans effet pour un eleve : ils ne donnent
+               acces a rien de plus, ils choisissent seulement ce qui s'affiche. */
+            var CLASSES = ['2GT6', '1STMG4', '1SPE HGGSP2', 'TSPE HGGSP2', 'aucune'];
+            var params = new URLSearchParams(location.search);
+            var force = params.get('classe');
+            if (CLASSES.indexOf(force) < 0) force = null;
+            if (force) window.EHG_APERCU = force;
+
+            var classe = force === 'aucune' ? null : force;
+            if (!classe) {
+              try { classe = localStorage.getItem('ehg.classe'); } catch (e) { /* navigation privee */ }
+            }
             var NIVEAUX = { '2GT6': 'seconde', '1STMG4': 'stmg',
                             '1SPE HGGSP2': 'spe', 'TSPE HGGSP2': 'spe' };
             if (classe && NIVEAUX[classe]) racine.setAttribute('data-niveau', NIVEAUX[classe]);

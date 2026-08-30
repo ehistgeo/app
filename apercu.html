@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aperçu — e-histgeo</title>
+    <!-- Page de service, destinée au professeur. Elle n'est liée depuis aucune
+         page de l'app et demande aux moteurs de recherche de l'ignorer. Elle ne
+         contient rien de confidentiel : elle montre l'app telle que les élèves la
+         voient, sous plusieurs angles. Elle ne protège donc rien, et n'a rien à
+         protéger. -->
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+    <style>
+        body{display:block;max-width:none;min-height:0;padding:18px 20px 40px}
+        .ap h1{margin:0 0 2px;font-size:20px;font-weight:700}
+        .ap__chapo{margin:0 0 18px;font-size:13px;line-height:1.5;color:var(--muted);max-width:70ch}
+        .ap h2{margin:26px 0 10px;font-size:12px;font-weight:700;letter-spacing:.09em;
+            text-transform:uppercase;color:var(--muted)}
+        .ap__barre{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+        .ap__b{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+            border-radius:8px;padding:0 12px;min-height:34px;cursor:pointer;
+            font:500 13px/1 var(--font)}
+        .ap__b:hover{border-color:var(--bleu);color:var(--bleu)}
+        .ap__b[aria-pressed="true"]{background:var(--panneau-actif);border-color:var(--bleu);
+            color:var(--bleu);font-weight:700}
+        .ap__b:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+        .ap__vues{display:flex;gap:16px;overflow-x:auto;padding-bottom:10px;align-items:flex-start}
+        .ap__vue{flex:0 0 auto}
+        .ap__vue h3{margin:0 0 6px;font:600 12.5px/1.2 var(--font);text-align:center}
+        .ap__vue iframe{width:390px;height:860px;border:1px solid var(--line);border-radius:14px;
+            background:var(--surface);display:block}
+        .ap--reduit .ap__vue iframe{zoom:.62}
+        table{border-collapse:collapse;width:100%;font-size:12.5px}
+        th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+        th{font-weight:700;color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+        td a{color:var(--bleu);word-break:break-all}
+        .ap__niv{font-size:11px;color:var(--muted);white-space:nowrap}
+        .ap__alerte{color:#B3123F;font-weight:600}
+        :root[data-theme="dark"] .ap__alerte{color:#FF8FB3}
+        .ap__etat{display:flex;flex-wrap:wrap;gap:8px}
+        .ap__cle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);
+            border-radius:8px;padding:6px 8px 6px 12px;background:var(--surface);font-size:12.5px}
+        .ap__cle b{font-weight:700}
+        .ap__cle span{color:var(--muted)}
+        .ap__note{margin:10px 0 0;font-size:12px;line-height:1.5;color:var(--muted);max-width:80ch}
+    </style>
+</head>
+<body>
+<div class="ap">
+
+    <h1>Aperçu de l’app</h1>
+    <p class="ap__chapo">Page de service, pour vous seul. Elle n’est liée depuis nulle part et demande aux
+    moteurs de recherche de l’ignorer, mais elle n’est pas protégée : le dépôt est public. Elle ne contient
+    d’ailleurs rien que vos élèves ne voient déjà.</p>
+
+    <h2>Les vues, une par classe</h2>
+    <div class="ap__barre">
+        <button class="ap__b" type="button" id="b-clair" aria-pressed="true">Clair</button>
+        <button class="ap__b" type="button" id="b-sombre" aria-pressed="false">Sombre</button>
+        <button class="ap__b" type="button" id="b-zoom" aria-pressed="false">Réduire</button>
+        <button class="ap__b" type="button" id="b-recharger">Recharger</button>
+    </div>
+    <div class="ap__vues" id="vues"></div>
+
+    <h2>Toutes les destinations</h2>
+    <p class="ap__chapo" id="resume">Lecture de <code>index.html</code>…</p>
+    <table id="table"><thead><tr>
+        <th>Tuile</th><th>Libellé</th><th>Visible par</th><th>Adresse</th>
+    </tr></thead><tbody></tbody></table>
+
+    <h2>Ce que l’app a retenu sur cet appareil</h2>
+    <div class="ap__etat" id="etat"></div>
+    <p class="ap__note">Effacer une valeur ne touche que votre appareil, jamais celui d’un élève.
+    Effacer <b>ehg.accueil</b> vous permet de revoir le message de première visite sans passer par la
+    navigation privée.</p>
+
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    var CLASSES = [
+        ['Sans classe retenue', 'aucune'],
+        ['2GT6', '2GT6'],
+        ['1STMG4', '1STMG4'],
+        ['1SPE HGGSP2', '1SPE HGGSP2'],
+        ['TSPE HGGSP2', 'TSPE HGGSP2']
+    ];
+    var CLES = ['ehg.classe', 'ehg.theme', 'ehg.accueil', 'ehg.invite', 'ehg.vus'];
+    var theme = 'light';
+
+    /* ---- Les vues ---------------------------------------------------------- */
+
+    function adresse(classe) {
+        var p = ['theme=' + theme];
+        if (classe) p.push('classe=' + encodeURIComponent(classe));
+        return 'index.html?' + p.join('&');
+    }
+
+    function poserVues() {
+        var hote = document.getElementById('vues');
+        hote.textContent = '';
+        CLASSES.forEach(function (c) {
+            var bloc = document.createElement('div');
+            bloc.className = 'ap__vue';
+            var titre = document.createElement('h3');
+            titre.textContent = c[0];
+            var cadre = document.createElement('iframe');
+            cadre.src = adresse(c[1]);
+            cadre.title = 'Aperçu pour ' + c[0];
+            cadre.loading = 'lazy';
+            bloc.appendChild(titre);
+            bloc.appendChild(cadre);
+            hote.appendChild(bloc);
+        });
+    }
+
+    function choisirTheme(t) {
+        theme = t;
+        document.getElementById('b-clair').setAttribute('aria-pressed', String(t === 'light'));
+        document.getElementById('b-sombre').setAttribute('aria-pressed', String(t === 'dark'));
+        document.documentElement.setAttribute('data-theme', t);
+        poserVues();
+    }
+
+    document.getElementById('b-clair').addEventListener('click', function () { choisirTheme('light'); });
+    document.getElementById('b-sombre').addEventListener('click', function () { choisirTheme('dark'); });
+    document.getElementById('b-recharger').addEventListener('click', poserVues);
+    document.getElementById('b-zoom').addEventListener('click', function () {
+        var reduit = document.querySelector('.ap').classList.toggle('ap--reduit');
+        this.setAttribute('aria-pressed', String(reduit));
+        this.textContent = reduit ? 'Taille réelle' : 'Réduire';
+    });
+
+    /* ---- La table des destinations ----------------------------------------- */
+    /* Elle est lue dans index.html a chaque ouverture, jamais recopiee : elle ne
+       peut donc pas se desynchroniser de l'app. */
+
+    function niveauDe(el) {
+        var n = el;
+        while (n && n.classList) {
+            if (n.classList.contains('pour-seconde')) return '2GT6 seulement';
+            if (n.classList.contains('pour-spe')) return 'spécialité HGGSP';
+            n = n.parentElement;
+        }
+        return 'toutes les classes';
+    }
+
+    function tuileDe(doc, el) {
+        if (el.classList.contains('tile--cours')) return 'Vos cours';
+        if (el.classList.contains('tile--cadre') || el.classList.contains('tile--lien')) return '(tuile directe)';
+        var panneau = el.closest('.menu__liste');
+        if (panneau) {
+            var etiquette = doc.querySelector('label[for="' + panneau.id.replace('liste-', 'etat-') + '"]');
+            if (etiquette) return etiquette.textContent.trim();
+        }
+        return '?';
+    }
+
+    fetch('index.html', { cache: 'no-store' }).then(function (r) { return r.text(); }).then(function (t) {
+        var doc = new DOMParser().parseFromString(t, 'text/html');
+        var liens = [].slice.call(doc.querySelectorAll('a[href^="http"]'));
+        var corps = document.querySelector('#table tbody');
+        var vus = {};
+        liens.forEach(function (a) {
+            var url = a.getAttribute('href');
+            vus[url] = (vus[url] || 0) + 1;
+        });
+        liens.forEach(function (a) {
+            var url = a.getAttribute('href');
+            var tr = document.createElement('tr');
+            [tuileDe(doc, a), a.textContent.trim(), niveauDe(a)].forEach(function (v, i) {
+                var td = document.createElement('td');
+                td.textContent = v;
+                if (i === 2) td.className = 'ap__niv';
+                tr.appendChild(td);
+            });
+            var td = document.createElement('td');
+            var lien = document.createElement('a');
+            lien.href = url;
+            lien.target = '_blank';
+            lien.rel = 'noopener noreferrer';
+            lien.textContent = url;
+            td.appendChild(lien);
+            if (vus[url] > 1) {
+                var d = document.createElement('span');
+                d.className = 'ap__alerte';
+                d.textContent = '  en double';
+                td.appendChild(d);
+            }
+            tr.appendChild(td);
+            corps.appendChild(tr);
+        });
+        var doublons = Object.keys(vus).filter(function (u) { return vus[u] > 1; }).length;
+        document.getElementById('resume').textContent =
+            liens.length + ' destinations, ' + (doublons ? doublons + ' en double.' : 'aucune en double.');
+    }).catch(function () {
+        document.getElementById('resume').textContent =
+            'Lecture impossible. Cette page doit être ouverte depuis le site, pas depuis un fichier local.';
+    });
+
+    /* ---- L'etat local ------------------------------------------------------ */
+
+    function montrerEtat() {
+        var hote = document.getElementById('etat');
+        hote.textContent = '';
+        CLES.forEach(function (cle) {
+            var valeur = null;
+            try { valeur = localStorage.getItem(cle); } catch (e) { /* navigation privee */ }
+            var bloc = document.createElement('div');
+            bloc.className = 'ap__cle';
+            var nom = document.createElement('b');
+            nom.textContent = cle;
+            var val = document.createElement('span');
+            val.textContent = valeur === null ? 'vide' : valeur;
+            var b = document.createElement('button');
+            b.className = 'ap__b';
+            b.type = 'button';
+            b.textContent = 'Effacer';
+            b.disabled = valeur === null;
+            b.addEventListener('click', function () {
+                try { localStorage.removeItem(cle); } catch (e) { /* navigation privee */ }
+                montrerEtat();
+                poserVues();
+            });
+            bloc.appendChild(nom);
+            bloc.appendChild(val);
+            bloc.appendChild(b);
+            hote.appendChild(bloc);
+        });
+    }
+
+    poserVues();
+    montrerEtat();
+})();
+</script>
+</body>
+</html>
