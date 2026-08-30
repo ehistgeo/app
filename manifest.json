@@ -27,5 +27,33 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["education"]
+  "categories": [
+    "education"
+  ],
+  "shortcuts": [
+    {
+      "name": "Cours de 2GT6",
+      "short_name": "2GT6",
+      "description": "Ouvrir directement le dossier de la classe 2GT6",
+      "url": "./index.html?aller=2GT6"
+    },
+    {
+      "name": "Cours de 1STMG4",
+      "short_name": "1STMG4",
+      "description": "Ouvrir directement le dossier de la classe 1STMG4",
+      "url": "./index.html?aller=1STMG4"
+    },
+    {
+      "name": "Cours de 1SPE HGGSP2",
+      "short_name": "1SPE HGGSP2",
+      "description": "Ouvrir directement le dossier de la classe 1SPE HGGSP2",
+      "url": "./index.html?aller=1SPE%20HGGSP2"
+    },
+    {
+      "name": "Cours de TSPE HGGSP2",
+      "short_name": "TSPE HGGSP2",
+      "description": "Ouvrir directement le dossier de la classe TSPE HGGSP2",
+      "url": "./index.html?aller=TSPE%20HGGSP2"
+    }
+  ]
 }

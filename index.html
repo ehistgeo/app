@@ -51,7 +51,16 @@
             if (CLASSES.indexOf(force) < 0) force = null;
             if (force) window.EHG_APERCU = force;
 
-            var classe = force === 'aucune' ? null : force;
+            /* Raccourci d'application : un appui long sur l'icone installee mene
+               ici, avec la classe voulue. Le niveau est pose tout de suite pour
+               que l'app ne clignote pas avant de rediriger. L'adresse du cours,
+               elle, n'est ecrite qu'a un seul endroit, dans les tuiles : c'est
+               app.js qui l'y lit. */
+            var aller = params.get('aller');
+            if (CLASSES.indexOf(aller) < 0 || aller === 'aucune') aller = null;
+            if (aller) window.EHG_ALLER = aller;
+
+            var classe = force === 'aucune' ? null : (force || aller);
             if (!classe) {
               try { classe = localStorage.getItem('ehg.classe'); } catch (e) { /* navigation privee */ }
             }

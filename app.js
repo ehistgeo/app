@@ -28,7 +28,8 @@
   /* En apercu, la classe vient de l'adresse et non du stockage : le professeur
      voit les quatre vues sans que son propre choix soit modifie. */
   var apercu = window.EHG_APERCU || null;
-  var maClasse = apercu ? (apercu === 'aucune' ? null : apercu) : lire(CLE_CLASSE);
+  var raccourci = window.EHG_ALLER || null;
+  var maClasse = apercu ? (apercu === 'aucune' ? null : apercu) : (raccourci || lire(CLE_CLASSE));
 
   Array.prototype.forEach.call(tuilesCours, function (tuile) {
     var nom = tuile.getAttribute('data-classe');
@@ -47,6 +48,20 @@
       if (!apercu) ecrire(CLE_CLASSE, nom);
     });
   });
+
+  /* Raccourci d'application : on retient la classe, puis on part directement
+     au dossier de cours. L'adresse est lue dans la tuile, jamais recopiee. */
+  if (raccourci) {
+    var cible = null;
+    Array.prototype.forEach.call(tuilesCours, function (tuile) {
+      if (tuile.getAttribute('data-classe') === raccourci) cible = tuile.href;
+    });
+    if (cible) {
+      ecrire(CLE_CLASSE, raccourci);
+      location.replace(cible);
+      return;
+    }
+  }
 
   /* ---- 3. Pastille de nouveauté ----------------------------------------- */
   /* Pour signaler une mise à jour, ajoutez data-nouveau="…" sur une tuile,
@@ -84,12 +99,12 @@
 
   /* Connu dès le départ, car beforeinstallprompt peut survenir avant que le
      message d'accueil ne soit construit. */
-  var accueilOuvert = !apercu && !lire(CLE_ACCUEIL) && typeof window.HTMLDialogElement === 'function';
+  var accueilOuvert = !apercu && !raccourci && !lire(CLE_ACCUEIL) && typeof window.HTMLDialogElement === 'function';
   var invitationEnAttente = null;
 
   var deja = window.matchMedia('(display-mode: standalone)').matches ||
              window.navigator.standalone === true;
-  var refusee = apercu || lire(CLE_INVITE) === 'non';
+  var refusee = apercu || raccourci || lire(CLE_INVITE) === 'non';
   var invitationAffichee = false;
   var evenementInstall = null;
 
@@ -272,6 +287,14 @@
       'fortement conseillé de la mettre en favoris sur votre ordinateur et de ' +
       'l’épingler sur votre smartphone.';
     boite.appendChild(texte);
+
+    /* Depuis que les ressources s'adaptent au niveau, l'eleve doit toucher sa
+       classe une fois pour que l'app sache qui il est. Rien ne le lui disait. */
+    var geste = document.createElement('p');
+    geste.className = 'accueil__texte';
+    geste.textContent = 'Touchez votre classe une première fois : l’app s’adaptera ' +
+      'ensuite à votre niveau.';
+    boite.appendChild(geste);
 
     var voeux = document.createElement('p');
     voeux.className = 'accueil__voeux';
