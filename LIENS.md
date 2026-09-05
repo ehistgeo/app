@@ -46,6 +46,7 @@ touchée au moins une fois.
 | YouTube | votre playlist | adresse directe | tous |
 | S'informer | menu de 8 titres de presse | menu | tous |
 | Se cultiver | menu de 7 chaînes | menu | tous |
+| Option Med’IA | chaîne YouTube de l’option | adresse directe | tous |
 
 **1STMG4 ne voit ni les tuiles d'orientation, ni celles de spécialité.**
 
