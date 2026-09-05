@@ -43,7 +43,7 @@ touchée au moins une fois.
 | Choisir l'HGGSP | menu de 5 liens | menu | 2GT6 seulement |
 | Bac HGGSP | menu de 3 liens | menu | 1SPE et TSPE HGGSP2 |
 | Grand oral | `education.gouv.fr` | adresse directe | 1SPE et TSPE HGGSP2 |
-| YouTube | votre playlist | adresse directe | tous |
+| Chaîne YT | votre playlist | adresse directe | tous |
 | Aller + loin | menu de 15 liens, en deux sous-groupes | menu | tous |
 | Option Med’IA | chaîne YouTube de l’option | adresse directe | tous |
 
