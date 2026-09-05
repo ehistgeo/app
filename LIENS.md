@@ -44,7 +44,7 @@ touchée au moins une fois.
 | Bac HGGSP | menu de 3 liens | menu | 1SPE et TSPE HGGSP2 |
 | Grand oral | `education.gouv.fr` | adresse directe | 1SPE et TSPE HGGSP2 |
 | YouTube | votre playlist | adresse directe | tous |
-| Se cultiver | menu de 15 liens, en deux sous-groupes | menu | tous |
+| Aller + loin | menu de 15 liens, en deux sous-groupes | menu | tous |
 | Option Med’IA | chaîne YouTube de l’option | adresse directe | tous |
 
 **1STMG4 ne voit ni les tuiles d'orientation, ni celles de spécialité.**
