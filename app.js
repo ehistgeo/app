@@ -14,6 +14,7 @@
   var CLE_INVITE = 'ehg.invite';
   var CLE_THEME = 'ehg.theme';
   var CLE_ACCUEIL = 'ehg.accueil';
+  var CLE_SIGNAL = 'ehg.signal';
 
   function lire(cle) {
     try { return localStorage.getItem(cle); } catch (e) { return null; }
@@ -169,6 +170,41 @@
   window.addEventListener('appinstalled', function () {
     ecrire(CLE_INVITE, 'non');
   });
+
+  /* ---- 9. Signal de presence ---------------------------------------------
+     Une fois par jour et par appareil, l'app previent le compteur qu'elle a
+     ete ouverte. Rien de plus n'est envoye : ni classe, ni heure, ni
+     identifiant. Le service, lui, n'enregistre qu'un nombre par jour.
+
+     Le signal ne part pas en apercu ni sur le trajet d'un raccourci, ou
+     l'eleve ne fait que passer, et pas davantage tant que l'adresse du
+     service n'est pas renseignee dans compteur.js : le comptage est alors
+     entierement inactif.
+
+     La date du dernier signal n'est notee qu'une fois celui-ci accepte par le
+     navigateur. Un eleve hors ligne n'est donc pas compte, mais il le sera a
+     sa prochaine ouverture connectee, le meme jour. */
+
+  var service = (typeof window.EHG_COMPTEUR === 'string') ? window.EHG_COMPTEUR : '';
+
+  if (service && !apercu && !raccourci) {
+    var aujourdhui = new Date().toLocaleDateString('fr-CA');
+    if (lire(CLE_SIGNAL) !== aujourdhui) {
+      var parti = false;
+      try {
+        if (navigator.sendBeacon) parti = navigator.sendBeacon(service + '/signal');
+      } catch (e) { parti = false; }
+      if (parti) {
+        ecrire(CLE_SIGNAL, aujourdhui);
+      } else {
+        try {
+          fetch(service + '/signal', { method: 'POST', mode: 'no-cors', keepalive: true })
+            .then(function () { ecrire(CLE_SIGNAL, aujourdhui); })
+            .catch(function () { /* hors ligne : on retentera a la prochaine ouverture */ });
+        } catch (e) { /* rien */ }
+      }
+    }
+  }
 
   /* ---- 8. Ressources adaptees a la classe --------------------------------
      Le script en ligne du <head> a deja pose data-niveau, ce qui suffit a

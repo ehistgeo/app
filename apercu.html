@@ -45,15 +45,38 @@
         .ap__cle b{font-weight:700}
         .ap__cle span{color:var(--muted)}
         .ap__note{margin:10px 0 0;font-size:12px;line-height:1.5;color:var(--muted);max-width:80ch}
+        .fq{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+        .fq__c{flex:1 1 150px;min-width:150px;border:1px solid var(--line);border-radius:var(--radius);
+            background:var(--surface);padding:10px 14px}
+        .fq__c b{display:block;font:700 24px/1.1 var(--font);color:var(--bleu)}
+        .fq__c span{display:block;margin-top:2px;font:500 11.5px/1.3 var(--font);color:var(--muted)}
+        .fq__g{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+            padding:14px 14px 8px}
+        .fq__g svg{display:block;width:100%;height:auto}
+        .fq__b{fill:var(--bleu)}
+        .fq__b--we{fill:var(--rang1)}
+        .fq__axe{stroke:var(--line);stroke-width:1}
+        .fq__t{fill:var(--muted);font:400 9px/1 var(--font)}
+        .fq__vide{border:1px dashed var(--line);border-radius:var(--radius);background:var(--surface);
+            padding:16px 18px;font-size:13px;line-height:1.6;max-width:80ch}
+        .fq__vide code{font-size:12px;background:var(--panneau);padding:1px 5px;border-radius:4px}
     </style>
 </head>
 <body>
 <div class="ap">
 
-    <h1>Aperçu de l’app</h1>
+    <h1>Tableau de bord</h1>
     <p class="ap__chapo">Page de service, pour vous seul. Elle n’est liée depuis nulle part et demande aux
     moteurs de recherche de l’ignorer, mais elle n’est pas protégée : le dépôt est public. Elle ne contient
     d’ailleurs rien que vos élèves ne voient déjà.</p>
+
+    <h2>Fréquentation</h2>
+    <div class="ap__barre" id="freq-barre">
+        <button class="ap__b" type="button" id="b-7" aria-pressed="false">7 jours</button>
+        <button class="ap__b" type="button" id="b-30" aria-pressed="true">30 jours</button>
+        <button class="ap__b" type="button" id="b-90" aria-pressed="false">90 jours</button>
+    </div>
+    <div id="freq"></div>
 
     <h2>Les vues, une par classe</h2>
     <div class="ap__barre">
@@ -78,6 +101,7 @@
 
 </div>
 
+<script src="compteur.js"></script>
 <script>
 (function () {
     'use strict';
@@ -89,7 +113,7 @@
         ['1SPE HGGSP2', '1SPE HGGSP2'],
         ['TSPE HGGSP2', 'TSPE HGGSP2']
     ];
-    var CLES = ['ehg.classe', 'ehg.theme', 'ehg.accueil', 'ehg.invite', 'ehg.vus'];
+    var CLES = ['ehg.classe', 'ehg.theme', 'ehg.accueil', 'ehg.invite', 'ehg.vus', 'ehg.signal'];
     var theme = 'light';
 
     /* ---- Les vues ---------------------------------------------------------- */
@@ -133,6 +157,155 @@
         var reduit = document.querySelector('.ap').classList.toggle('ap--reduit');
         this.setAttribute('aria-pressed', String(reduit));
         this.textContent = reduit ? 'Taille réelle' : 'Réduire';
+    });
+
+    /* ---- La frequentation ---------------------------------------------------- */
+    /* Le service ne renvoie qu'un objet { "AAAA-MM-JJ": nombre }. Tout le reste,
+       moyennes et graphique, est calcule ici. */
+
+    var service = (typeof window.EHG_COMPTEUR === 'string') ? window.EHG_COMPTEUR : '';
+    var fenetre = 30;
+
+    function carte(valeur, libelle) {
+        var d = document.createElement('div');
+        d.className = 'fq__c';
+        var b = document.createElement('b'); b.textContent = valeur; d.appendChild(b);
+        var s = document.createElement('span'); s.textContent = libelle; d.appendChild(s);
+        return d;
+    }
+
+    function graphique(jours) {
+        var dates = Object.keys(jours).sort();
+        var max = Math.max.apply(null, dates.map(function (d) { return jours[d]; }).concat([1]));
+        var LG = 1000, H = 220, bas = 26, gauche = 26;
+        var large = (LG - gauche) / dates.length;
+        var ns = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', '0 0 ' + LG + ' ' + H);
+        svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-label', 'Appareils distincts par jour sur ' + dates.length + ' jours');
+
+        [0, 0.5, 1].forEach(function (f) {
+            var y = (H - bas) - f * (H - bas - 10);
+            var l = document.createElementNS(ns, 'line');
+            l.setAttribute('x1', gauche); l.setAttribute('x2', LG);
+            l.setAttribute('y1', y); l.setAttribute('y2', y);
+            l.setAttribute('class', 'fq__axe');
+            svg.appendChild(l);
+            var t = document.createElementNS(ns, 'text');
+            t.setAttribute('x', 0); t.setAttribute('y', y + 3);
+            t.setAttribute('class', 'fq__t');
+            t.textContent = Math.round(f * max);
+            svg.appendChild(t);
+        });
+
+        var pas = dates.length > 45 ? 10 : (dates.length > 14 ? 5 : 1);
+        dates.forEach(function (d, i) {
+            var v = jours[d];
+            var h = max ? (v / max) * (H - bas - 10) : 0;
+            var r = document.createElementNS(ns, 'rect');
+            r.setAttribute('x', gauche + i * large + large * 0.15);
+            r.setAttribute('width', Math.max(1, large * 0.7));
+            r.setAttribute('y', (H - bas) - h);
+            r.setAttribute('height', Math.max(v ? 1 : 0, h));
+            var js = new Date(d + 'T12:00:00').getDay();
+            r.setAttribute('class', 'fq__b' + (js === 0 || js === 6 ? ' fq__b--we' : ''));
+            var ti = document.createElementNS(ns, 'title');
+            ti.textContent = d + ' : ' + v + (v > 1 ? ' appareils' : ' appareil');
+            r.appendChild(ti);
+            svg.appendChild(r);
+            if (i % pas === 0) {
+                var t = document.createElementNS(ns, 'text');
+                t.setAttribute('x', gauche + i * large + large * 0.5);
+                t.setAttribute('y', H - 8);
+                t.setAttribute('text-anchor', 'middle');
+                t.setAttribute('class', 'fq__t');
+                t.textContent = d.slice(8) + '/' + d.slice(5, 7);
+                svg.appendChild(t);
+            }
+        });
+
+        var boite = document.createElement('div');
+        boite.className = 'fq__g';
+        boite.appendChild(svg);
+        return boite;
+    }
+
+    function montrerFrequentation() {
+        var hote = document.getElementById('freq');
+        hote.textContent = '';
+
+        if (!service) {
+            var v = document.createElement('div');
+            v.className = 'fq__vide';
+            var p1 = document.createElement('p');
+            p1.style.margin = '0 0 8px';
+            p1.textContent = 'Le comptage n\u2019est pas encore actif. Rien n\u2019est envoy\u00e9, rien ' +
+                'n\u2019est enregistr\u00e9, l\u2019app se comporte exactement comme avant.';
+            var p2 = document.createElement('p');
+            p2.style.margin = '0';
+            p2.textContent = 'Pour l\u2019activer, suivez compteur/README.md dans le d\u00e9p\u00f4t, ' +
+                'puis remplacez la cha\u00eene vide de compteur.js par l\u2019adresse du service.';
+            v.appendChild(p1); v.appendChild(p2);
+            hote.appendChild(v);
+            return;
+        }
+
+        var attente = document.createElement('p');
+        attente.className = 'ap__chapo';
+        attente.textContent = 'Lecture du compteur\u2026';
+        hote.appendChild(attente);
+
+        fetch(service + '/jours?n=' + fenetre, { cache: 'no-store' })
+            .then(function (r) { return r.json(); })
+            .then(function (jours) {
+                hote.textContent = '';
+                var dates = Object.keys(jours).sort();
+                var valeurs = dates.map(function (d) { return jours[d]; });
+                var total = valeurs.reduce(function (a, b) { return a + b; }, 0);
+                var ouvres = dates.filter(function (d) {
+                    var j = new Date(d + 'T12:00:00').getDay();
+                    return j !== 0 && j !== 6;
+                });
+                var to = ouvres.reduce(function (a, d) { return a + jours[d]; }, 0);
+                var moyenne = ouvres.length ? Math.round(to / ouvres.length) : 0;
+                var meilleur = dates.reduce(function (m, d) { return jours[d] > jours[m] ? d : m; }, dates[0]);
+
+                var cartes = document.createElement('div');
+                cartes.className = 'fq';
+                cartes.appendChild(carte(String(jours[dates[dates.length - 1]]), 'aujourd\u2019hui'));
+                cartes.appendChild(carte(String(moyenne), 'moyenne par jour ouvr\u00e9'));
+                cartes.appendChild(carte(String(total), 'total sur ' + dates.length + ' jours'));
+                cartes.appendChild(carte(String(jours[meilleur]), 'record, le ' +
+                    meilleur.slice(8) + '/' + meilleur.slice(5, 7)));
+                hote.appendChild(cartes);
+                hote.appendChild(graphique(jours));
+
+                var note = document.createElement('p');
+                note.className = 'ap__note';
+                note.textContent = 'Appareils distincts ayant ouvert l\u2019app dans la journ\u00e9e, et non ' +
+                    'nombre d\u2019ouvertures. Un \u00e9l\u00e8ve hors ligne n\u2019est pas compt\u00e9. ' +
+                    'Les week-ends sont en teinte claire.';
+                hote.appendChild(note);
+            })
+            .catch(function () {
+                hote.textContent = '';
+                var e = document.createElement('div');
+                e.className = 'fq__vide';
+                e.textContent = 'Le compteur ne r\u00e9pond pas. V\u00e9rifiez l\u2019adresse dans ' +
+                    'compteur.js, et que la base est bien reli\u00e9e au service sous le nom COMPTEUR.';
+                hote.appendChild(e);
+            });
+    }
+
+    [['b-7', 7], ['b-30', 30], ['b-90', 90]].forEach(function (paire) {
+        document.getElementById(paire[0]).addEventListener('click', function () {
+            fenetre = paire[1];
+            ['b-7', 'b-30', 'b-90'].forEach(function (i) {
+                document.getElementById(i).setAttribute('aria-pressed', String(i === paire[0]));
+            });
+            montrerFrequentation();
+        });
     });
 
     /* ---- La table des destinations ----------------------------------------- */
@@ -233,6 +406,7 @@
         });
     }
 
+    montrerFrequentation();
     poserVues();
     montrerEtat();
 })();
