@@ -145,6 +145,11 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
   background:var(--surface);border:1px solid var(--line);border-radius:8px;
   color:var(--ink);text-decoration:none;
   font-size:var(--fs-lien);font-weight:var(--fw-lien);line-height:1.15}
+/* Sous-titre a l'interieur d'un panneau, quand celui-ci reunit deux ensembles
+   de nature differente. Il occupe la largeur des deux colonnes. */
+.menu__titre{grid-column:1 / -1;margin:4px 0 0;font-size:10.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.menu__titre:first-child{margin-top:0}
 .menu__lien:hover{border-color:var(--bleu);color:var(--bleu);background:var(--survol)}
 .menu__lien:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
 
@@ -157,9 +162,6 @@ body{margin:0;overflow-x:hidden;min-height:100vh;min-height:100svh;display:flex;
 #etat-hggsp:checked ~ #liste-hggsp{display:grid}
 #etat-hggsp:checked ~ .menu-bouton[for="etat-hggsp"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
 #etat-hggsp:focus-visible ~ .menu-bouton[for="etat-hggsp"]{outline:3px solid var(--focus);outline-offset:2px}
-#etat-informer:checked ~ #liste-informer{display:grid}
-#etat-informer:checked ~ .menu-bouton[for="etat-informer"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
-#etat-informer:focus-visible ~ .menu-bouton[for="etat-informer"]{outline:3px solid var(--focus);outline-offset:2px}
 #etat-regarder:checked ~ #liste-regarder{display:grid}
 #etat-regarder:checked ~ .menu-bouton[for="etat-regarder"]{border-color:var(--bleu);color:var(--bleu);background:var(--panneau-actif)}
 #etat-regarder:focus-visible ~ .menu-bouton[for="etat-regarder"]{outline:3px solid var(--focus);outline-offset:2px}
