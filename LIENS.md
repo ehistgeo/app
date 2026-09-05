@@ -36,7 +36,7 @@ touchée au moins une fois.
 | ENT | `psn.monlycee.net` | adresse directe | tous |
 | LYCÉE | `cdg-longperrier.fr` | adresse directe, en `http` | tous |
 | Pearltrees | lien de partage Pearltrees | adresse directe | tous |
-| Réactiv' | `reactiv.dane.ac-versailles.fr/reactiv/app/` | adresse directe | tous |
+| Ré_activ | `reactiv.dane.ac-versailles.fr/reactiv/app/` | adresse directe | tous |
 | IA | `duck.ai` | adresse directe | tous |
 | Casier | `edurl.fr/ehistgeo-casier` | raccourci | tous |
 | Orientation | menu de 3 liens | menu | 2GT6 seulement |
