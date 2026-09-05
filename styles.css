@@ -38,7 +38,7 @@
   --maxw:600px; --pad-x:18px; --pad-y:clamp(11px,2vh,20px);
   --gap-block:clamp(9px,1.5vh,15px); --gap-hero:6px; --gap-tile:10px;
   /* Respiration supplémentaire au-dessus des deux titres de groupe,
-     identique pour « Vos cours » et « Vos outils et ressources ». */
+     identique pour « Vos cours » et « Vos outils & ressources ». */
   --space-group:clamp(9px,2.6vh,22px);
   --logo:clamp(58px,9vh,76px);
   --fs-welcome:15px; --fw-welcome:700;

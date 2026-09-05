@@ -24,7 +24,7 @@ modification.
 
 ## Les tuiles, et qui les voit
 
-Le bloc « Vos outils et ressources » s'adapte à la classe que l'élève a
+Le bloc « Vos outils & ressources » s'adapte à la classe que l'élève a
 touchée au moins une fois.
 
 | Tuile | Destination | Nature | Vue par |
