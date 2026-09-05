@@ -3,7 +3,7 @@
 Mémo destiné à l'enseignant, pour la bascule de rentrée ou le remplacement
 d'un lien en cours d'année. Aucune connaissance technique n'est nécessaire.
 
-État au 30 août 2026. La source de vérité reste `index.html` ; ce document le
+État au 8 septembre 2026. La source de vérité reste `index.html` ; ce document le
 décrit, il ne le remplace pas.
 
 ## L'essentiel en une phrase
@@ -38,7 +38,7 @@ touchée au moins une fois.
 | Pearltrees | lien de partage Pearltrees | adresse directe | tous |
 | Réactiv' | `reactiv.dane.ac-versailles.fr/reactiv/app/` | adresse directe | tous |
 | IA | `duck.ai` | adresse directe | tous |
-| Casier | `edurl.fr/ehistgeo-depot` | raccourci | tous |
+| Casier | `edurl.fr/ehistgeo-casier` | raccourci | tous |
 | Orientation | menu de 3 liens | menu | 2GT6 seulement |
 | Choisir l'HGGSP | menu de 5 liens | menu | 2GT6 seulement |
 | Bac HGGSP | menu de 3 liens | menu | 1SPE et TSPE HGGSP2 |
@@ -114,10 +114,16 @@ certificat est invalide et qui impose `http`.
 nouvelle. C'est le prix du fonctionnement hors ligne, et cela se règle de
 lui-même.
 
-**Trois liens échappent à toute vérification automatique**, les serveurs de
-`education.gouv.fr` et de `parcoursup.gouv.fr` refusant les contrôles
-automatisés : « Bien choisir », « Parcoursup » et « Grand oral ». Cliquez-les
-vous-même après une modification.
+**Un raccourci mort ne se signale pas.** Quand un lien `edurl.fr` cesse
+d'exister, le raccourcisseur répond normalement et affiche sa propre page
+« lien invalide » : rien ne distingue cette réponse d'un lien qui marche, sinon
+la page où l'on aboutit. Ne vous fiez donc pas au fait que « ça répond »,
+regardez où vous arrivez.
+
+**Certains liens échappent à toute vérification automatique.** Les serveurs de
+`education.gouv.fr`, de `parcoursup.gouv.fr` et parfois de `liberation.fr`
+refusent les contrôles automatisés. Cliquez-les vous-même après une
+modification.
 
 ## Vérifier après une modification
 
